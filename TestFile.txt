@@ -2,3 +2,4 @@ New Text
 New Text line 2
 Another line
 lets try again?
+merging branches?

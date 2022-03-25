@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week2\FileInteraction\bin\Debug\net6.0\FileInteraction.exe
+C:\Revature\DanGagne\week2\FileInteraction\bin\Debug\net6.0\FileInteraction.deps.json
+C:\Revature\DanGagne\week2\FileInteraction\bin\Debug\net6.0\FileInteraction.runtimeconfig.json
+C:\Revature\DanGagne\week2\FileInteraction\bin\Debug\net6.0\FileInteraction.dll
+C:\Revature\DanGagne\week2\FileInteraction\bin\Debug\net6.0\FileInteraction.pdb
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.AssemblyInfo.cs
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.dll
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\refint\FileInteraction.dll
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.pdb
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\FileInteraction.genruntimeconfig.cache
+C:\Revature\DanGagne\week2\FileInteraction\obj\Debug\net6.0\ref\FileInteraction.dll

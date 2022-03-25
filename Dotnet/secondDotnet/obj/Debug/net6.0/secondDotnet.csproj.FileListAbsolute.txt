@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\Dotnet\secondDotnet\bin\Debug\net6.0\secondDotnet.exe
+C:\Revature\DanGagne\Dotnet\secondDotnet\bin\Debug\net6.0\secondDotnet.deps.json
+C:\Revature\DanGagne\Dotnet\secondDotnet\bin\Debug\net6.0\secondDotnet.runtimeconfig.json
+C:\Revature\DanGagne\Dotnet\secondDotnet\bin\Debug\net6.0\secondDotnet.dll
+C:\Revature\DanGagne\Dotnet\secondDotnet\bin\Debug\net6.0\secondDotnet.pdb
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.AssemblyInfo.cs
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.dll
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\refint\secondDotnet.dll
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.pdb
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\secondDotnet.genruntimeconfig.cache
+C:\Revature\DanGagne\Dotnet\secondDotnet\obj\Debug\net6.0\ref\secondDotnet.dll

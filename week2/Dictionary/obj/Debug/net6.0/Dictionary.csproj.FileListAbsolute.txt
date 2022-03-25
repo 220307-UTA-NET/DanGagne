@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week2\Dictionary\bin\Debug\net6.0\Dictionary.exe
+C:\Revature\DanGagne\week2\Dictionary\bin\Debug\net6.0\Dictionary.deps.json
+C:\Revature\DanGagne\week2\Dictionary\bin\Debug\net6.0\Dictionary.runtimeconfig.json
+C:\Revature\DanGagne\week2\Dictionary\bin\Debug\net6.0\Dictionary.dll
+C:\Revature\DanGagne\week2\Dictionary\bin\Debug\net6.0\Dictionary.pdb
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.AssemblyInfo.cs
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.dll
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\refint\Dictionary.dll
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.pdb
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\Dictionary.genruntimeconfig.cache
+C:\Revature\DanGagne\week2\Dictionary\obj\Debug\net6.0\ref\Dictionary.dll

@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week2\Arrays\bin\Debug\net6.0\Arrays.exe
+C:\Revature\DanGagne\week2\Arrays\bin\Debug\net6.0\Arrays.deps.json
+C:\Revature\DanGagne\week2\Arrays\bin\Debug\net6.0\Arrays.runtimeconfig.json
+C:\Revature\DanGagne\week2\Arrays\bin\Debug\net6.0\Arrays.dll
+C:\Revature\DanGagne\week2\Arrays\bin\Debug\net6.0\Arrays.pdb
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.AssemblyInfo.cs
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.dll
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\refint\Arrays.dll
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.pdb
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\Arrays.genruntimeconfig.cache
+C:\Revature\DanGagne\week2\Arrays\obj\Debug\net6.0\ref\Arrays.dll

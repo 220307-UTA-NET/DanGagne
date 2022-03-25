@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\bin\Debug\net6.0\PowerTesting.exe
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\bin\Debug\net6.0\PowerTesting.deps.json
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\bin\Debug\net6.0\PowerTesting.runtimeconfig.json
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\bin\Debug\net6.0\PowerTesting.dll
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\bin\Debug\net6.0\PowerTesting.pdb
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.AssemblyInfo.cs
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.dll
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\refint\PowerTesting.dll
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.pdb
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\PowerTesting.genruntimeconfig.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\PowerTesting\obj\Debug\net6.0\ref\PowerTesting.dll

@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week2\FunctionTesting\bin\Debug\net6.0\FunctionTesting.exe
+C:\Revature\DanGagne\week2\FunctionTesting\bin\Debug\net6.0\FunctionTesting.deps.json
+C:\Revature\DanGagne\week2\FunctionTesting\bin\Debug\net6.0\FunctionTesting.runtimeconfig.json
+C:\Revature\DanGagne\week2\FunctionTesting\bin\Debug\net6.0\FunctionTesting.dll
+C:\Revature\DanGagne\week2\FunctionTesting\bin\Debug\net6.0\FunctionTesting.pdb
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.AssemblyInfo.cs
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.dll
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\refint\FunctionTesting.dll
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.pdb
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\FunctionTesting.genruntimeconfig.cache
+C:\Revature\DanGagne\week2\FunctionTesting\obj\Debug\net6.0\ref\FunctionTesting.dll

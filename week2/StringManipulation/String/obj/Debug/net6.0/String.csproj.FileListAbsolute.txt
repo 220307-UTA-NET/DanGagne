@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week2\StringManipulation\String\bin\Debug\net6.0\String.exe
+C:\Revature\DanGagne\week2\StringManipulation\String\bin\Debug\net6.0\String.deps.json
+C:\Revature\DanGagne\week2\StringManipulation\String\bin\Debug\net6.0\String.runtimeconfig.json
+C:\Revature\DanGagne\week2\StringManipulation\String\bin\Debug\net6.0\String.dll
+C:\Revature\DanGagne\week2\StringManipulation\String\bin\Debug\net6.0\String.pdb
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.AssemblyInfo.cs
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.dll
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\refint\String.dll
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.pdb
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\String.genruntimeconfig.cache
+C:\Revature\DanGagne\week2\StringManipulation\String\obj\Debug\net6.0\ref\String.dll

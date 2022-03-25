@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.AssemblyInfo.cs
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\bin\Debug\net6.0\InheritanceTesting.exe
+C:\Revature\DanGagne\week3\InheritanceTesting\bin\Debug\net6.0\InheritanceTesting.deps.json
+C:\Revature\DanGagne\week3\InheritanceTesting\bin\Debug\net6.0\InheritanceTesting.runtimeconfig.json
+C:\Revature\DanGagne\week3\InheritanceTesting\bin\Debug\net6.0\InheritanceTesting.dll
+C:\Revature\DanGagne\week3\InheritanceTesting\bin\Debug\net6.0\InheritanceTesting.pdb
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.dll
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\refint\InheritanceTesting.dll
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.pdb
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\InheritanceTesting.genruntimeconfig.cache
+C:\Revature\DanGagne\week3\InheritanceTesting\obj\Debug\net6.0\ref\InheritanceTesting.dll

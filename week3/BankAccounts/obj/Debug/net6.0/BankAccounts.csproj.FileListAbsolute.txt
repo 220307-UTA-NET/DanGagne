@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.AssemblyInfo.cs
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week3\BankAccounts\bin\Debug\net6.0\BankAccounts.exe
+C:\Revature\DanGagne\week3\BankAccounts\bin\Debug\net6.0\BankAccounts.deps.json
+C:\Revature\DanGagne\week3\BankAccounts\bin\Debug\net6.0\BankAccounts.runtimeconfig.json
+C:\Revature\DanGagne\week3\BankAccounts\bin\Debug\net6.0\BankAccounts.dll
+C:\Revature\DanGagne\week3\BankAccounts\bin\Debug\net6.0\BankAccounts.pdb
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.dll
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\refint\BankAccounts.dll
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.pdb
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\BankAccounts.genruntimeconfig.cache
+C:\Revature\DanGagne\week3\BankAccounts\obj\Debug\net6.0\ref\BankAccounts.dll

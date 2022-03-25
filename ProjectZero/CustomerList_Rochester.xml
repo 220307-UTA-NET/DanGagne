@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-16"?><ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Customer fname="Dan" lname="Gagne" defaultStore="Rochester" /><Customer fname="Arron" lname="Pinser" defaultStore="Rochester" /><Customer fname="Lauren" lname="Hopps" defaultStore="Rochester" /></ArrayOfCustomer>

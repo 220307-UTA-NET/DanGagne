@@ -26,4 +26,5 @@ for name in ${ClockIns[@]}; do
 	echo $name >> ./ClockInOut.txt
 done
 
+unset IFS
 echo "Exiting Timeclock"

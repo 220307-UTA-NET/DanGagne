@@ -1,0 +1,15 @@
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.AssemblyInfo.cs
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\ProjectZero\bin\Debug\net6.0\ProjectZero.exe
+C:\Revature\DanGagne\ProjectZero\bin\Debug\net6.0\ProjectZero.deps.json
+C:\Revature\DanGagne\ProjectZero\bin\Debug\net6.0\ProjectZero.runtimeconfig.json
+C:\Revature\DanGagne\ProjectZero\bin\Debug\net6.0\ProjectZero.dll
+C:\Revature\DanGagne\ProjectZero\bin\Debug\net6.0\ProjectZero.pdb
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.dll
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\refint\ProjectZero.dll
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.pdb
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ProjectZero.genruntimeconfig.cache
+C:\Revature\DanGagne\ProjectZero\obj\Debug\net6.0\ref\ProjectZero.dll

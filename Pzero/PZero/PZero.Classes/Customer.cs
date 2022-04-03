@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+[assembly: InternalsVisibleTo("PZero.Test")]
+
+namespace PZero.Classes
+{
+    public class Customer
+    {
+        //Fields
+        internal string? fname { get; set; }
+        internal string? lname { get; set; }
+        internal string? address { get; set; }
+        internal string? city { get; set; }
+        internal string? state { get; set; }
+        internal string? country { get; set; }
+        internal int storeID { get; set; }
+        internal int custID { get; set; }
+        internal List<Item> orders { get; set; }=new List<Item>();
+
+        //Item will be object created when customer adds something from stock to theri shopping cart
+        //List<Item> shoppingCart = new List<Item>;
+
+        //Constructor
+
+        public Customer() { }
+        public Customer(string fname, string lname)
+        {
+            this.fname = fname;
+            this.lname = lname;
+        }
+        public Customer(string fname, string lname, int custID, int storeID)
+        {
+            this.fname = fname;
+            this.lname = lname;
+            this.custID = custID;
+            this.storeID = storeID;
+        }
+        
+        public Customer(string fname, string lname, string address, string city, string state, string country)
+        {
+            this.fname = fname;
+            this.lname = lname;
+            this.address = address;
+            this.city = city;
+            this.state = state; 
+            this.country = country;
+        }
+
+        //Method
+        public string GetCustName()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{this.fname} {this.lname}");
+            return sb.ToString();
+        }
+        public int GetCustID()
+        {
+            return this.custID;
+        }
+        public int GetStoreID()
+        {
+            return this.storeID;
+        }
+
+        public string GetAddress()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"\n{this.address}\n{this.city} {this.state}, {this.country}");
+            return sb.ToString();
+        }
+        
+        //public void 
+    }
+}

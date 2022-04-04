@@ -1,14 +1,17 @@
 ﻿
 using PZero.Classes;
-//using ProjectZero;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
+
+
+[assembly: InternalsVisibleTo("PZero.Test")]
 
 namespace PZero.Database
 {
     public class SqlRepo : IRepo
     {
         //Fields
-        private readonly string _connString;
+        internal readonly string _connString;
 
         //Constructor
         public SqlRepo(string connString)
@@ -19,8 +22,9 @@ namespace PZero.Database
 
         //Methods
 
-        public void AddNewCustomer(string fname, string lname, int storeID)
+        public Customer AddNewCustomer(string fname, string lname, int storeID)
         {
+            Customer cust1 = new Customer();
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
 
@@ -29,9 +33,24 @@ namespace PZero.Database
             cmd.Parameters.AddWithValue("@fname", fname);
             cmd.Parameters.AddWithValue("@lname", lname);
             cmd.Parameters.AddWithValue("@storeID", storeID);
-
             cmd.ExecuteNonQuery();
+
+            cmdText = @"SELECT * FROM Store.Customer WHERE @fname=NameFirst AND @lname=NameLast;";
+            using SqlCommand cmd2 = new(cmdText, connect);
+            cmd2.Parameters.AddWithValue("@fname", fname);
+            cmd2.Parameters.AddWithValue("@lname", lname);
+            using SqlDataReader reader = cmd2.ExecuteReader();
+            while (reader.Read())
+            {
+                fname = reader.GetString(0);
+                lname = reader.GetString(1);             
+                int custID = reader.GetInt32(7);
+                storeID = reader.GetInt32(8);
+                cust1 = new(fname, lname, custID, storeID);
+            }
             connect.Close();
+            return cust1;
+            
         }
 
         public IEnumerable<Customer> SearchCustomers(string inputname)
@@ -66,7 +85,9 @@ namespace PZero.Database
                 if (reader.IsDBNull(5))
                 { country = ""; }
                 else { country = reader.GetString(5); }
-                custList.Add(new(fname, lname, address, city, state, country));
+                int custID = reader.GetInt32(7);
+                int storeID = reader.GetInt32(8);
+                custList.Add(new(fname, lname, address, city, state, country, custID, storeID));
             }
             connect.Close();
             return custList;
@@ -89,15 +110,73 @@ namespace PZero.Database
 
                 string fname = reader.GetString(0);
                 string lname = reader.GetString(1);
+                string address;
+                if (reader.IsDBNull(2))
+                { address = ""; }
+                else { address = reader.GetString(2); }
+                string city;
+                if (reader.IsDBNull(3))
+                { city = ""; }
+                else { city = reader.GetString(3); }
+                string state;
+                if (reader.IsDBNull(4))
+                { state = ""; }
+                else { state = reader.GetString(4); }
+                string country;
+                if (reader.IsDBNull(5))
+                { country = ""; }
+                else { country = reader.GetString(5); }
                 int custID = reader.GetInt32(7);
                 int storeID = reader.GetInt32(8);
-                cust1 = new(fname, lname, custID, storeID);
+                cust1 = new(fname, lname, address, city, state, country, custID, storeID);
                 return cust1;
 
             }
             connect.Close();
-            return cust1;
+            return cust1=new("Guest", "No Address on file.",99);
         }
+
+        public Customer CustomerLogin(int custID)
+        {
+            Customer cust1 = new Customer();
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"SELECT * FROM Store.Customer WHERE Customer.CustomerID=@custID;";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.Parameters.AddWithValue("@custID", custID);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+
+                string fname = reader.GetString(0);
+                string lname = reader.GetString(1);
+                string address;
+                if (reader.IsDBNull(2))
+                { address = ""; }
+                else { address = reader.GetString(2); }
+                string city;
+                if (reader.IsDBNull(3))
+                { city = ""; }
+                else { city = reader.GetString(3); }
+                string state;
+                if (reader.IsDBNull(4))
+                { state = ""; }
+                else { state = reader.GetString(4); }
+                string country;
+                if (reader.IsDBNull(5))
+                { country = ""; }
+                else { country = reader.GetString(5); }
+                int storeID = reader.GetInt32(8);
+                cust1 = new(fname, lname, address, city, state, country, custID, storeID);
+                return cust1;
+
+            }
+            connect.Close();
+            return cust1=new("Guest","No Address on file.", 99);
+        }
+
         public IEnumerable<Item> SearchInventory(string inputname, int storeID)
         {
             List<Item> itemList = new List<Item>();
@@ -165,7 +244,7 @@ namespace PZero.Database
 
         }
 
-        public void DeleteItem(Item item, int storeID)
+        public int DeleteItem(Item item, int storeID)
         {
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
@@ -175,9 +254,15 @@ namespace PZero.Database
             cmd.Parameters.AddWithValue("@sku", item.GetSku());
             cmd.Parameters.AddWithValue("@quantity", item.GetQuantity());
             cmd.Parameters.AddWithValue("@storeID", storeID);
- 
-            cmd.ExecuteNonQuery();
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int itemQuantity = reader.GetInt32(2);
+                return itemQuantity;
+            }
             connect.Close();
+            return 0;
         }
 
         public int CheckQuantity(Item item, int storeID)
@@ -218,20 +303,31 @@ namespace PZero.Database
             connect.Close();
         }
 
-        public void UpdateCustomerAddress(string address, string city, string state, int custID)
+        public int UpdateCustomerAddress(string address, string city, string state, int custID)
         {
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
 
-            string cmdText = @"UPDATE Store.Customer SET Address=@address, City=@city, State=@state, Country=USA WHERE CustomerID=@custID";
+            string cmdText = @"UPDATE Store.Customer SET Address=@address, City=@city, State=@state, Country='USA' WHERE CustomerID=@custID";
             using SqlCommand cmd = new(cmdText, connect);
             cmd.Parameters.AddWithValue("@address", address);
             cmd.Parameters.AddWithValue("@city", city);
             cmd.Parameters.AddWithValue("@state", state);
             cmd.Parameters.AddWithValue("@custID", custID);
+            cmd.ExecuteNonQuery ();
 
-            cmd.ExecuteNonQuery();
+            cmdText = @"SELECT * FROM Store.Customer WHERE @custID=CustomerID;";
+            using SqlCommand cmd2 = new(cmdText, connect);
+            cmd2.Parameters.AddWithValue("@custID", custID);         
+            using SqlDataReader reader = cmd2.ExecuteReader();
+
+            while (reader.Read())
+            {
+                custID = reader.GetInt32(7);         
+                return custID;
+            }
             connect.Close();
+            return custID = 99;
         }
         public IEnumerable<Item> PopulateOrderHistory(int cust_storeID)
         {
@@ -267,6 +363,50 @@ namespace PZero.Database
             connect.Close();
             return itemList;
 
+        }
+
+        public string GetStoreName(int storeID)
+        {
+            string storeName = "Rochester";
+
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"SELECT * FROM Store.Location WHERE StoreLocationID=@storeID;";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.Parameters.AddWithValue("@storeID", storeID);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                storeName = reader.GetString(1);
+                return storeName;
+            }
+            connect.Close();
+            return storeName;
+
+
+        }
+
+        public List<string> ListStoreNames()
+        {
+            List<string> storeNames = new List<string>();
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"SELECT * FROM Store.Location";
+            using SqlCommand cmd = new(cmdText, connect);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int storeID = reader.GetInt32(0);
+                string storeName = reader.GetString(1);
+                string nameID = $"{storeID}-{ storeName}";
+                storeNames.Add(nameID);
+            }
+            connect.Close();
+            return storeNames;
         }
     }
 }

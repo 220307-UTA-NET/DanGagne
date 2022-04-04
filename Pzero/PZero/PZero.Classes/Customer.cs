@@ -27,6 +27,12 @@ namespace PZero.Classes
         //Constructor
 
         public Customer() { }
+        public Customer(string fname, string address,int custID)
+        { 
+            this.fname = fname;
+            this.address = address;
+            this.custID = custID; 
+        }
         public Customer(string fname, string lname)
         {
             this.fname = fname;
@@ -39,8 +45,8 @@ namespace PZero.Classes
             this.custID = custID;
             this.storeID = storeID;
         }
-        
-        public Customer(string fname, string lname, string address, string city, string state, string country)
+       
+        public Customer(string fname, string lname, string address, string city, string state, string country, int custID, int storeID)
         {
             this.fname = fname;
             this.lname = lname;
@@ -48,6 +54,8 @@ namespace PZero.Classes
             this.city = city;
             this.state = state; 
             this.country = country;
+            this.custID=custID;
+            this.storeID=storeID;
         }
 
         //Method
@@ -68,9 +76,18 @@ namespace PZero.Classes
 
         public string GetAddress()
         {
+            if(this.address == "No Address on file.")
+            {
+                return this.address;
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append($"\n{this.address}\n{this.city} {this.state}, {this.country}");
+            if(sb.ToString()=="\n\n , ")
+            {
+                return "\nNo Address on file.";
+            }
             return sb.ToString();
+
         }
         
         //public void 

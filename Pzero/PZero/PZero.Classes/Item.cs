@@ -24,6 +24,14 @@ namespace PZero.Classes
         //Constructors
         public Item() { }
 
+        public Item(string itemName, decimal price, int sku, int quantity)
+        {
+            this.itemName = itemName;
+            this.price = price;
+            this.sku = sku;
+            this.quantity = quantity;
+        }
+
         public Item(string itemName, string material, decimal price, int quantity, int sku, DateTime purchasedate)
         {
             this.itemName = itemName;
@@ -81,5 +89,6 @@ namespace PZero.Classes
         {
             return this.price;
         }
+
     }
 }

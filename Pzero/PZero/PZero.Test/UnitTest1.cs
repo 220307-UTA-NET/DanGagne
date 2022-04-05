@@ -49,6 +49,32 @@ namespace PZero.Test
             Assert.Equal(expected.custID, test.custID);
         }
 
+        [Fact]
+        public void Store_StoreLogin_GetCustomerAccount()
+        {
+            //ARRANGE
+            Mock<IRepo> mockRepo = new();
+            Customer expected1 = new Customer("testfname", "testlname",10,20);
+            Customer expected2 = new Customer("testfname2", "testlname2", 100, 200);
+            mockRepo.Setup(x => x.CustomerLogin(10)).Returns(expected1);
+            mockRepo.Setup(x => x.CustomerLogin(100)).Returns(expected2);
+            var store = new App.Store(mockRepo.Object);
+
+            //ACT
+            Customer actual1 = store.StoreLogin(10);
+            Customer actual2 = store.StoreLogin(100);
+
+            //ASSERT
+            Assert.Equal(expected1.fname, actual1.fname);
+            Assert.Equal(expected2.fname, actual2.fname); 
+            Assert.Equal(expected1.lname, actual1.lname);   
+            Assert.Equal(expected2.lname, actual2.lname);
+            Assert.Equal(expected1.custID, actual1.custID);
+            Assert.Equal(expected2.custID, actual2.custID);
+            Assert.Equal(expected1.storeID, actual1.storeID);
+            Assert.Equal(expected2.storeID, actual2.storeID);
+        }
+
          [Fact]
 
         public void Store_GetOneItem_ValidItem()
@@ -116,16 +142,20 @@ namespace PZero.Test
         {
             //ARRANGE
             Mock<IRepo> mockRepo = new();
-            Item expected = new Item("testItem", 100, 200, "imaginary", 300, 400);          
+            Item expected = new Item("testItem", 100, 200, "imaginary", 300, 400);
+            Item expected2 = new Item("testItem", 100, 100, "imaginary", 300, 400);
             mockRepo.Setup(x => x.DeleteItem(expected, 400)).Returns(expected.quantity-expected.quantity);
+            mockRepo.Setup(x => x.DeleteItem(expected2, 400)).Returns(expected.quantity - expected2.quantity);
             var store = new App.Store(mockRepo.Object);
 
 
             //ACT
             int actualquantity = store.RemoveItem(expected, 400);
-            
+            int actualquantity2 = store.RemoveItem(expected2, 400);
+
             //ASSERT 
             Assert.Equal(0, actualquantity);
+            Assert.Equal(100, actualquantity2);
         }
             
         [Fact]

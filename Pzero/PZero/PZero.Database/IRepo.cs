@@ -20,12 +20,17 @@ namespace PZero.Database
         int CheckQuantity(Item item, int storeID);
         Customer CustomerLogin(string username, string password);
         Customer CustomerLogin(int custID);
-        void AddToOrderHistory(Item item, int storeID, int custID);
+        void AddToOrderHistory(Item item, int storeID, int custID, string purchasedate);
         int UpdateCustomerAddress(string address, string city, string state, int custID);
         IEnumerable<Item>PopulateOrderHistory(int custID);
 
         string GetStoreName(int storeID);
 
         List <string> ListStoreNames();
+
+        void SaveItemToCustCart(Item item, int custID);
+        void UpdateItemInCart(Item item, int custID);
+        bool CheckIfItemExistsInCart(Item item, int custID);
+        IEnumerable<Item> GetCustCart(int custID);
     }
 }

@@ -34,8 +34,9 @@ namespace PZero.App
                 Console.WriteLine("[1] - Account Menu");
                 Console.WriteLine("[2] - Shopping Menu");
                 Console.WriteLine("[3] - Change Store Location");
-                Console.WriteLine("[8] - Search for a Customer");
-                Console.WriteLine("[9] - View Store Order History");
+                Console.WriteLine("[4] - Store Employees Only");
+                //Console.WriteLine("[8] - Search for a Customer");
+               // Console.WriteLine("[9] - View Store Order History");
                 Console.WriteLine("[0] - Exit");
 
                 switch (Console.ReadLine())
@@ -54,6 +55,10 @@ namespace PZero.App
                         Console.Clear();
                         storeID = GetListStoreNames();
                         break;
+                    case "4":
+                        Console.Clear();
+                        StoreMenu(storeID);
+                        break;
                     case "8":
                         Console.Clear();
                         SearchCustomers();
@@ -65,6 +70,8 @@ namespace PZero.App
                         break;
                     case "0":
                         Console.Clear();
+                        if(custID != 99)
+                        { SaveShoppingCart(shoppingCart,custID); }
                         Console.WriteLine("Goodbye!");
                         return;
                     default:
@@ -74,25 +81,31 @@ namespace PZero.App
                 }
             }
         }
-        public int AccountMenu(int custID, int storeID, string userLocation, string guestName, ShoppingCart shoppingCart)
+        public int AccountMenu(int custID, int storeID, string userLocation, string guestName, ShoppingCart shoppingCart) 
         {
-            string guestAddress = "No Address on file.";
+            string guestAddress = StoreLogin(custID).GetAddress();
             while (true)
             {
                 Console.Clear();
-                //guestAddress=StoreLogin(custID).GetAddress();
                 Console.WriteLine($"Account Menu.\nWelcome {guestName}! \nAddress:{guestAddress}");
                 Console.WriteLine("[1] - Create Account or Log In");
                 Console.WriteLine("[2] - Update Customer Address");
                 Console.WriteLine("[3] - View Shopping Cart");
                 Console.WriteLine("[4] - View Customer Order History");
+                Console.WriteLine("[5] - Log Out");
                 Console.WriteLine("[0] - Return to the Main Menu");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
                         Console.Clear();
-                        Customer cust1 = this.LogIn();
+                        if(custID != 99)
+                        { 
+                            Console.WriteLine("You are already logged in!");
+                            Thread.Sleep(900);
+                            break;
+                        }
+                        Customer cust1 = LogIn();
                         if (cust1.GetCustID() == 99)
                         {
                             Console.WriteLine("No account found. Please create an account if you do not have one.");
@@ -100,6 +113,7 @@ namespace PZero.App
                         }
                         else
                         {
+                            
                             Console.WriteLine("Welcome Back!");
                             Thread.Sleep(900);
                         }
@@ -107,7 +121,7 @@ namespace PZero.App
                         guestName = cust1.GetCustName();
                         storeID = cust1.GetStoreID();
                         guestAddress = cust1.GetAddress();
-                        //userLocation = this.StoreName(storeID);
+                        shoppingCart = FillCustCart(custID, shoppingCart);
                         break;
                     case "2":
                         Console.Clear();
@@ -117,13 +131,22 @@ namespace PZero.App
                     case "3":
                         Console.Clear();
                         shoppingCart.ViewCart();
-                        Console.WriteLine("\nPress any key to return to the main menu.");
+                        Console.WriteLine("\nPress enter to return to the Account menu.");
                         Console.ReadLine();
                         break;
                     case "4":
                         Console.Clear();
                         Console.WriteLine(CustOrderHistory(custID));
                         Console.ReadLine();
+                        break;
+                    case "5":
+                        Console.Clear();
+                        SaveShoppingCart(shoppingCart, custID);
+                        cust1=LogOut();
+                        guestName = cust1.GetCustName();
+                        guestAddress = cust1.GetAddress();
+                        custID = cust1.GetCustID();
+                        shoppingCart.EmptyCart();
                         break;
                     case "0":
                         Console.Clear();
@@ -160,7 +183,7 @@ namespace PZero.App
                     case "2":
                         Console.Clear();
                         shoppingCart.ViewCart();
-                        Console.WriteLine("\nPress any key to return to the Shopping menu.");
+                        Console.WriteLine("\nPress enter to return to the Shopping menu.");
                         Console.ReadLine();
                         break;
                     case "3":
@@ -172,7 +195,7 @@ namespace PZero.App
                     case "4":
                         Console.Clear();
                         Console.WriteLine(this.CheckOut(shoppingCart, storeID, custID));
-                        Console.WriteLine("\nPress any key to return to the Shopping menu.");
+                        Console.WriteLine("\nPress enter to return to the Shopping menu.");
                         Console.ReadLine();
                         break;
                     case "5":
@@ -192,6 +215,44 @@ namespace PZero.App
 
             }
 
+        }
+        public void StoreMenu(int storeID)
+        {
+            while (true)
+            {
+                Console.Clear();
+                string userLocation = StoreName(storeID);
+                Console.WriteLine("Currently viewing: " + userLocation+"\n");
+                Console.WriteLine("[1] - Select Store");
+                Console.WriteLine("[2] - Search for a Customer");
+                Console.WriteLine("[3] - View Store Order History");
+                Console.WriteLine("[0] - Return to Main Menu");
+
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        Console.Clear();
+                        storeID = GetListStoreNames();
+                        break;
+                    case "2":
+                        Console.Clear();
+                        SearchCustomers();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        Console.WriteLine(StoreOrderHistory(storeID));
+                        Console.ReadLine();
+                        break;
+                    case "0":
+                        Console.Clear();                      
+                        return;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Invalid option.  Please try again.");
+                        break;
+
+                }
+            }
         }
         public Customer AddCustomer(int storeID)
         {
@@ -225,7 +286,6 @@ namespace PZero.App
             }
 
         }
-
         public void SearchCustomers()
         {
             while (true)
@@ -253,14 +313,13 @@ namespace PZero.App
             Console.WriteLine("Search Completed.\nReturning to the menu");
             Thread.Sleep(900);
         }
-
         public void SearchStoreInventory(int storeID, string userLocation, ShoppingCart shoppingCart)
         {
             while (true)
             {
                 Console.WriteLine("Enter the item you wish to search for by name or material.");
                 string inputname = Console.ReadLine();
-                IEnumerable<Item> itemList = this.repo.SearchInventory(inputname, storeID);
+                IEnumerable<Item> itemList = repo.SearchInventory(inputname, storeID);
                 Console.Clear();
                 Console.WriteLine(itemList.Count() + " : Entries Found at the " + userLocation + " branch.");
                 foreach (Item i in itemList)
@@ -291,7 +350,6 @@ namespace PZero.App
             Console.WriteLine("Search Completed.\nReturning to the main menu");
             Thread.Sleep(900);
         }
-
         public string CheckOut(ShoppingCart shoppingCart, int storeID, int custID)
         {
 
@@ -303,6 +361,7 @@ namespace PZero.App
                 if (custID == 99)
                 { return "Invalid Username or password.\nOrder cannot be processed."; }
             }
+            shoppingCart = FillCustCart(custID, shoppingCart);
             List<Item> itemsInCart = shoppingCart.GetCart();
             foreach (Item i in itemsInCart)
             {
@@ -319,10 +378,11 @@ namespace PZero.App
             {
                 return "Order Cancelled.";
             }
+            string purchasedate= DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             foreach (Item i in itemsInCart)
             {
                 RemoveItem(i, storeID);
-                repo.AddToOrderHistory(i, storeID, custID);
+                repo.AddToOrderHistory(i, storeID, custID, purchasedate);
             }
             Console.Clear();
             shoppingCart.EmptyCart();
@@ -331,7 +391,6 @@ namespace PZero.App
 
             //add all items to purchase database with customerID and storeID
         }
-
         public Customer LogIn()
         {
             Console.Clear();
@@ -341,10 +400,9 @@ namespace PZero.App
             Console.WriteLine("Enter your password(last name):");
             string password = Console.ReadLine();
             Console.Clear();
-            return this.repo.CustomerLogin(username, password);
+            return repo.CustomerLogin(username, password);
 
         }
-
         public string UpdateAddress(int custID)
         {
             if (custID == 99)
@@ -389,7 +447,6 @@ namespace PZero.App
             }
 
         }
-
         public string CustOrderHistory(int custID)
         {
             decimal totalSpent = 0;
@@ -400,7 +457,7 @@ namespace PZero.App
                 custID = cust.GetCustID();
                 if (custID == 99)
                 { return "Invalid Username or password.\nRequest cannot be processed."; }
-            }
+            }           
             IEnumerable<Item> itemList = CallPopulateOrderHistory(custID);
             foreach (Item i in itemList)
             {
@@ -418,24 +475,21 @@ namespace PZero.App
                 Console.WriteLine("\n" + i.OrderInfo());
                 totalSales += i.GetQuantity() * i.GetPrice();
             }
-            return "\nTotal for all sales: $" + totalSales.ToString() + "\n\nPress enter to return to the main menu.";
+            return "\nTotal for all sales at the "+StoreName(storeID)+": $" + totalSales.ToString() + "\n\nPress enter to return to the main menu.";
         }
-
         public Customer StoreLogin(int custID)
         {
-            return this.repo.CustomerLogin(custID);
+            return repo.CustomerLogin(custID);
         }
-
         public string StoreName(int storeID)
         {
-            return this.repo.GetStoreName(storeID);
+            return repo.GetStoreName(storeID);
         }
-
         public int GetListStoreNames()
         {
             Console.Clear();
             Console.WriteLine("Select a Store Location by entering its number.\n");
-            foreach(string s in this.repo.ListStoreNames())
+            foreach(string s in repo.ListStoreNames())
             {
                 Console.WriteLine(s+"\n");
             }
@@ -451,24 +505,51 @@ namespace PZero.App
             }
                      
         }
-
         public Item GetOneItem(int skuAdd, int storeID)
         {
-            return this.repo.FindOneItem(skuAdd, storeID);
+            return repo.FindOneItem(skuAdd, storeID);
         }
-
         public int RemoveItem(Item i, int storeID)
         {
-            return this.repo.DeleteItem(i, storeID);
-        }
-    
+            return repo.DeleteItem(i, storeID);
+        }  
         public Customer CallAddNewCustomer(string inputfname, string inputlname, int storeID)
         {
-            return this.repo.AddNewCustomer(inputfname, inputlname, storeID);
+            return repo.AddNewCustomer(inputfname, inputlname, storeID);
         }
         public IEnumerable<Item> CallPopulateOrderHistory(int custID)
         {
             return repo.PopulateOrderHistory(custID);
+        }
+        public Customer LogOut()
+        {
+            Customer cust1 = new Customer("Guest", "No Address on file.", 99);
+            return cust1;
+        }
+        public void SaveShoppingCart(ShoppingCart shoppingCart, int custID)
+        {
+            foreach(Item item in shoppingCart.GetCart())
+            {
+                bool alreadythere =repo.CheckIfItemExistsInCart(item, custID);
+                if(alreadythere==true)
+                {
+                    repo.UpdateItemInCart(item, custID);
+                    Console.WriteLine("Item exists in cart");
+                    Thread.Sleep(900);
+                }
+                else
+                {
+                    repo.SaveItemToCustCart(item, custID);
+                }
+            }
+        } 
+        public ShoppingCart FillCustCart(int custID, ShoppingCart shoppingCart)
+        {
+            foreach (Item item in repo.GetCustCart(custID))
+            {
+                shoppingCart.AddToCart(item);
+            }
+            return shoppingCart;
         }
     }
     

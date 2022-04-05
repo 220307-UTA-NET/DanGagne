@@ -43,14 +43,14 @@ namespace PZero.Database
             while (reader.Read())
             {
                 fname = reader.GetString(0);
-                lname = reader.GetString(1);             
+                lname = reader.GetString(1);
                 int custID = reader.GetInt32(7);
                 storeID = reader.GetInt32(8);
                 cust1 = new(fname, lname, custID, storeID);
             }
             connect.Close();
             return cust1;
-            
+
         }
 
         public IEnumerable<Customer> SearchCustomers(string inputname)
@@ -95,7 +95,7 @@ namespace PZero.Database
         }
         public Customer CustomerLogin(string username, string password)
         {
-            Customer cust1=new Customer();
+            Customer cust1 = new Customer();
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
 
@@ -133,7 +133,7 @@ namespace PZero.Database
 
             }
             connect.Close();
-            return cust1=new("Guest", "No Address on file.",99);
+            return cust1 = new("Guest", "No Address on file.", 99);
         }
 
         public Customer CustomerLogin(int custID)
@@ -174,7 +174,7 @@ namespace PZero.Database
 
             }
             connect.Close();
-            return cust1=new("Guest","No Address on file.", 99);
+            return cust1 = new("Guest", "No Address on file.", 99);
         }
 
         public IEnumerable<Item> SearchInventory(string inputname, int storeID)
@@ -271,7 +271,7 @@ namespace PZero.Database
             connect.Open();
 
             string cmdText = @"SELECT * FROM Store.Stock WHERE StoreLocationID=@storeID AND SKU=@sku;";
-            using SqlCommand cmd = new (cmdText, connect);
+            using SqlCommand cmd = new(cmdText, connect);
             cmd.Parameters.AddWithValue("@sku", item.GetSku());
             cmd.Parameters.AddWithValue("@storeID", storeID);
 
@@ -284,20 +284,21 @@ namespace PZero.Database
             }
             connect.Close();
             return 0;
-            
+
         }
 
-        public void AddToOrderHistory(Item item, int storeID, int custID)
+        public void AddToOrderHistory(Item item, int storeID, int custID, string purchasedate)
         {
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
 
-            string cmdText = @"INSERT INTO Store.Purchase(CustomerID, StoreLocationID, SKU, Quantity) VALUES (@custID, @storeID, @itemSku, @itemQuantity);";
+            string cmdText = @"INSERT INTO Store.Purchase(CustomerID, StoreLocationID, SKU, Quantity, PurchaseDate) VALUES (@custID, @storeID, @itemSku, @itemQuantity, @purchasedate);";
             using SqlCommand cmd = new(cmdText, connect);
             cmd.Parameters.AddWithValue("@custID", custID);
             cmd.Parameters.AddWithValue("@storeID", storeID);
             cmd.Parameters.AddWithValue("@itemSku", item.GetSku());
-            cmd.Parameters.AddWithValue("itemQuantity", item.GetQuantity());
+            cmd.Parameters.AddWithValue("@itemQuantity", item.GetQuantity());
+            cmd.Parameters.AddWithValue("@purchasedate", purchasedate);
 
             cmd.ExecuteNonQuery();
             connect.Close();
@@ -314,16 +315,16 @@ namespace PZero.Database
             cmd.Parameters.AddWithValue("@city", city);
             cmd.Parameters.AddWithValue("@state", state);
             cmd.Parameters.AddWithValue("@custID", custID);
-            cmd.ExecuteNonQuery ();
+            cmd.ExecuteNonQuery();
 
             cmdText = @"SELECT * FROM Store.Customer WHERE @custID=CustomerID;";
             using SqlCommand cmd2 = new(cmdText, connect);
-            cmd2.Parameters.AddWithValue("@custID", custID);         
+            cmd2.Parameters.AddWithValue("@custID", custID);
             using SqlDataReader reader = cmd2.ExecuteReader();
 
             while (reader.Read())
             {
-                custID = reader.GetInt32(7);         
+                custID = reader.GetInt32(7);
                 return custID;
             }
             connect.Close();
@@ -336,8 +337,8 @@ namespace PZero.Database
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
 
-            string cmdText="";
-            if(cust_storeID >99)
+            string cmdText = "";
+            if (cust_storeID > 99)
             {
                 cmdText = @"SELECT * FROM Store.Purchase INNER JOIN Store.Stock ON (Store.Stock.SKU=Store.Purchase.SKU AND Store.Stock.StoreLocationID=Store.Purchase.StoreLocationID) WHERE CustomerID=@cust_storeID;";
             }
@@ -345,7 +346,7 @@ namespace PZero.Database
             {
                 cmdText = @"SELECT * FROM Store.Purchase INNER JOIN Store.Stock ON (Store.Stock.SKU=Store.Purchase.SKU AND Store.Stock.StoreLocationID=Store.Purchase.StoreLocationID) WHERE Purchase.StoreLocationID=@cust_storeID;";
             }
-            
+
             using SqlCommand cmd = new(cmdText, connect);
             cmd.Parameters.AddWithValue("@cust_storeID", cust_storeID);
 
@@ -354,7 +355,7 @@ namespace PZero.Database
             {
                 int sku = reader.GetInt32(2);
                 int quantity = reader.GetInt32(3);
-                DateTime date = reader.GetDateTime(4);
+                string date = reader.GetString(4);
                 string itemName = reader.GetString(6);
                 decimal price = reader.GetDecimal(7);
                 string material = reader.GetString(10);
@@ -407,6 +408,93 @@ namespace PZero.Database
             }
             connect.Close();
             return storeNames;
+        }
+        public void SaveItemToCustCart(Item item, int custID)
+        {
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"INSERT INTO Store.ShoppingCart(CustomerID, StoreLocationID, SKU, Quantity) VALUES (@custID, '1', @itemSku, @itemQuantity);";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.Parameters.AddWithValue("@custID", custID);
+            cmd.Parameters.AddWithValue("@itemSku", item.GetSku());
+            cmd.Parameters.AddWithValue("@itemQuantity", item.GetQuantity());
+
+
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+        public void UpdateItemInCart(Item item, int custID)
+        {
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"UPDATE Store.ShoppingCart SET Quantity = Quantity+@itemQuantity WHERE CustomerID=@custID AND SKU=@itemSKU;";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.Parameters.AddWithValue("@custID", custID);
+            cmd.Parameters.AddWithValue("@itemSku", item.GetSku());
+            cmd.Parameters.AddWithValue("@itemQuantity", item.GetQuantity());
+
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public bool CheckIfItemExistsInCart(Item item, int custID)
+        {
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"SELECT * FROM Store.ShoppingCart WHERE CustomerID=@custID AND SKU=@itemSku;";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.Parameters.AddWithValue("@custID", custID);
+            cmd.Parameters.AddWithValue("@itemSku", item.GetSku());        
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {             
+                return true;
+            }
+            connect.Close();
+            return false;
+
+        }
+
+        public IEnumerable<Item> GetCustCart(int custID)
+        {
+            List<Item> itemList = new List<Item>();
+
+            using SqlConnection connect = new SqlConnection(this._connString);
+            connect.Open();
+
+            string cmdText = @"SELECT * FROM Store.ShoppingCart INNER JOIN Store.Stock ON Store.ShoppingCart.SKU=Store.Stock.SKU  WHERE Store.ShoppingCart.CustomerID=@custID AND Store.Stock.StoreLocationID=1";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.Parameters.AddWithValue("@custID",custID);          
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int storeID = reader.GetInt32(1);
+                int sku = reader.GetInt32(2);
+                string itemName = reader.GetString(4);
+                decimal price = reader.GetDecimal(5);
+                string material = reader.GetString(8);
+                int quantity = reader.GetInt32(3);          
+                itemList.Add(new(itemName, price, quantity, material, sku, storeID));
+            }
+            connect.Close();
+
+            using SqlConnection connect2 = new SqlConnection(this._connString);
+            connect2.Open();
+
+            cmdText = @"DELETE FROM Store.ShoppingCart WHERE CustomerID=@custID;";
+            using SqlCommand cmd2 = new(cmdText, connect2);
+            cmd2.Parameters.AddWithValue("@custID", custID);
+
+            cmd2.ExecuteNonQuery();
+            connect.Close();
+
+            
+            return itemList;
         }
     }
 }

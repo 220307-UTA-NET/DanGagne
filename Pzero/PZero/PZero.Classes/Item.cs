@@ -15,12 +15,8 @@ namespace PZero.Classes
         internal int storeID { get; set; }
         internal int quantity { get; set; }
         internal string? material { get; }
-        internal string? description { get; }
-        internal DateTime purchasedate {get;}
-
-
-
-        
+        internal string? purchasedate {get;}
+     
         //Constructors
         public Item() { }
 
@@ -32,7 +28,7 @@ namespace PZero.Classes
             this.quantity = quantity;
         }
 
-        public Item(string itemName, string material, decimal price, int quantity, int sku, DateTime purchasedate)
+        public Item(string itemName, string material, decimal price, int quantity, int sku, string purchasedate)
         {
             this.itemName = itemName;
             this.material = material;
@@ -52,8 +48,6 @@ namespace PZero.Classes
         }
 
         //Methods
-
-        //public ChangePrice() { }
 
         public string GetInfo()
         {

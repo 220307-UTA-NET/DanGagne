@@ -10,14 +10,12 @@ namespace PZero.Classes
     {
         //fields
         List<Item> itemsInCart { get; set; } = new List<Item>();
-        Customer? customer { get; set; }
 
         //Constructor
         public ShoppingCart() { }
-        public ShoppingCart(List<Item> itemsInCart, Customer customer)
+        public ShoppingCart(List<Item> itemsInCart)
         {
             this.itemsInCart = itemsInCart;
-            this.customer = customer;
         }
 
         //Methods
@@ -38,11 +36,13 @@ namespace PZero.Classes
                     { i.quantity++; }
                 }
                 Console.WriteLine("Quantity of item updated shopping cart.");
+                Thread.Sleep(900);
             }
             else
             { 
                 this.itemsInCart.Add(add);
                 Console.WriteLine(add.quantity+" item(s) added to shopping cart.");
+                Thread.Sleep(900);
             }
         }
         public string RemoveFromCart()
@@ -118,7 +118,6 @@ namespace PZero.Classes
         {
             return this.itemsInCart;
         }
-
         public decimal GetCartTotalPrice()
         {
             decimal total = 0;

@@ -19,11 +19,7 @@ namespace PZero.Classes
         internal string? country { get; set; }
         internal int storeID { get; set; }
         internal int custID { get; set; }
-        internal List<Item> orders { get; set; }=new List<Item>();
-
-        //Item will be object created when customer adds something from stock to theri shopping cart
-        //List<Item> shoppingCart = new List<Item>;
-
+ 
         //Constructor
 
         public Customer() { }
@@ -33,11 +29,7 @@ namespace PZero.Classes
             this.address = address;
             this.custID = custID; 
         }
-        public Customer(string fname, string lname)
-        {
-            this.fname = fname;
-            this.lname = lname;
-        }
+
         public Customer(string fname, string lname, int custID, int storeID)
         {
             this.fname = fname;
@@ -73,7 +65,6 @@ namespace PZero.Classes
         {
             return this.storeID;
         }
-
         public string GetAddress()
         {
             if(this.address == "No Address on file.")
@@ -90,6 +81,5 @@ namespace PZero.Classes
 
         }
         
-        //public void 
     }
 }

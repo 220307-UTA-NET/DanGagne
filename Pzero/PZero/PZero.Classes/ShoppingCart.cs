@@ -33,7 +33,7 @@ namespace PZero.Classes
                 foreach(Item i in itemsInCart)
                 {
                     if(i.sku == add.sku)
-                    { i.quantity++; }
+                    { i.quantity=i.quantity+add.quantity; }
                 }
                 Console.WriteLine("Quantity of item updated shopping cart.");
                 Thread.Sleep(900);

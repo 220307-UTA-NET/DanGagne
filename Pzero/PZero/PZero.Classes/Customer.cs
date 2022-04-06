@@ -37,7 +37,15 @@ namespace PZero.Classes
             this.custID = custID;
             this.storeID = storeID;
         }
-       
+        public Customer(string fname, string lname, string address, int custID, int storeID)
+        {
+            this.fname = fname;
+            this.lname = lname;
+            this.custID = custID;
+            this.storeID = storeID;
+            this.address=address;
+        }
+
         public Customer(string fname, string lname, string address, string city, string state, string country, int custID, int storeID)
         {
             this.fname = fname;

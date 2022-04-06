@@ -1,7 +1,6 @@
 using Xunit;
 using PZero.Classes;
 using PZero.Database;
-using PZero.Classes;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;

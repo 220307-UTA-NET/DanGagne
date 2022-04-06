@@ -139,7 +139,7 @@ namespace PZero.Database
 
             }
             connect.Close();
-            return cust1 = new("Guest", "No Address on file.", 99);
+            return cust1 = new("Guest", "", "No Address on file.", 99, 1);
         }
 
         public Customer CustomerLogin(int custID)
@@ -180,7 +180,7 @@ namespace PZero.Database
 
             }
             connect.Close();
-            return cust1 = new("Guest", "No Address on file.", 99);
+            return cust1 = new("Guest","","No Address on file.", 99, 1);
         }
 
         public IEnumerable<Item> SearchInventory(string inputname, int storeID)

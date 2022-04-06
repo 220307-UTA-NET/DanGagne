@@ -348,6 +348,11 @@ namespace PZero.App
             }
             shoppingCart = FillCustCart(custID, shoppingCart);
             List<Item> itemsInCart = shoppingCart.GetCart();
+            if(itemsInCart.Count == 0)
+            {
+                Console.Clear();
+                return "You have no items in your cart!";
+            }
             foreach (Item i in itemsInCart)
             {
                 int stockquantity = repo.CheckQuantity(i, storeID);
@@ -357,6 +362,7 @@ namespace PZero.App
                     return "Not enough items in stock at this location.\nOrder cancelled.";
                 }
             }
+            shoppingCart.ViewCart();
             Console.WriteLine("Your total will be: $" + shoppingCart.GetCartTotalPrice() + "\nEnter \'Confirm\' to place your order.");
             string confirmed = Console.ReadLine().ToUpper();
             if (confirmed != "CONFIRM")

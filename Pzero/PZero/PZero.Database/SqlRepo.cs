@@ -59,8 +59,14 @@ namespace PZero.Database
 
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
+            string cmdText;
+            if (inputname == "showall")
+            {
+                cmdText = @"SELECT* FROM Store.Customer;";
+            }
+            else
+            { cmdText = @"SELECT * FROM Store.Customer WHERE @inputname=NameFirst OR @inputname=NameLast;"; }
 
-            string cmdText = @"SELECT * FROM Store.Customer WHERE @inputname=NameFirst OR @inputname=NameLast;";
             using SqlCommand cmd = new(cmdText, connect);
             cmd.Parameters.AddWithValue("@inputname", inputname);
 
@@ -184,7 +190,13 @@ namespace PZero.Database
             using SqlConnection connect = new SqlConnection(this._connString);
             connect.Open();
 
-            string cmdText = @"SELECT * FROM Store.Stock WHERE StoreLocationID=@storeID AND (@inputname=ItemName OR @inputname=Material);";
+            string cmdText;
+            if (inputname == "showall")
+            {
+                cmdText = @"SELECT* FROM Store.Stock WHERE StoreLocationID=@storeID;";
+            }
+            else
+            { cmdText = @"SELECT * FROM Store.Stock WHERE StoreLocationID=@storeID AND (@inputname=ItemName OR @inputname=Material);"; }
             using SqlCommand cmd = new(cmdText, connect);
             cmd.Parameters.AddWithValue("@inputname", inputname);
             cmd.Parameters.AddWithValue("@storeID", storeID);
@@ -211,7 +223,7 @@ namespace PZero.Database
             if (Int32.TryParse(Console.ReadLine(), out int quantity))
             {
                 Console.Clear();
-                if (quantity > 30)
+                if (quantity > 50)
                 {
                     Console.WriteLine("This is an abnormally high order.  Please call the store directly for an order this large.");
                     return item;

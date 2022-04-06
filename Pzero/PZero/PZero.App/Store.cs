@@ -23,51 +23,37 @@ namespace PZero.App
         //Methods
         public void MainMenu(int custID, int storeID, ShoppingCart shoppingCart)
         {
+            
+
             while (true)
             {
-                Console.Clear();
-                string userLocation = StoreName(storeID);
-                string guestName = StoreLogin(custID).GetCustName();
-                //store1.ReadFromXml(custID); customer shopping cart.
+                Customer cust1 = StoreLogin(custID);
+                string guestName = cust1.GetCustName();
+                storeID = cust1.GetStoreID();
+                Console.Clear();              
                 Console.WriteLine("Welcome to the Furniture store.");
-                Console.WriteLine("Current location: " + userLocation + "\nCurrent user: " + guestName + "\n");
+                Console.WriteLine("Current user: " + guestName + "\n");
                 Console.WriteLine("[1] - Account Menu");
                 Console.WriteLine("[2] - Shopping Menu");
-                Console.WriteLine("[3] - Change Store Location");
-                Console.WriteLine("[4] - Store Employees Only");
-                //Console.WriteLine("[8] - Search for a Customer");
-               // Console.WriteLine("[9] - View Store Order History");
+                Console.WriteLine("[3] - Store Employees Only");
                 Console.WriteLine("[0] - Exit");
 
                 switch (Console.ReadLine())
                 {
                     case "1":
                         Console.Clear();
-                        Customer cust1 = StoreLogin(AccountMenu(custID, storeID, userLocation, guestName, shoppingCart));
+                        cust1 = StoreLogin(AccountMenu(custID, storeID, guestName, shoppingCart));
                         custID = cust1.GetCustID();
                         storeID = cust1.GetStoreID();
                         break;
                     case "2":
                         Console.Clear();
-                        storeID = ShoppingMenu(custID, storeID, userLocation, guestName, shoppingCart);
+                        storeID = ShoppingMenu(custID, storeID, shoppingCart);
                         break;
                     case "3":
                         Console.Clear();
-                        storeID = GetListStoreNames();
-                        break;
-                    case "4":
-                        Console.Clear();
                         StoreMenu(storeID);
-                        break;
-                    case "8":
-                        Console.Clear();
-                        SearchCustomers();
-                        break;
-                    case "9":
-                        Console.Clear();
-                        Console.WriteLine(StoreOrderHistory(storeID));
-                        Console.ReadLine();
-                        break;
+                        break;                
                     case "0":
                         Console.Clear();
                         if(custID != 99)
@@ -81,7 +67,7 @@ namespace PZero.App
                 }
             }
         }
-        public int AccountMenu(int custID, int storeID, string userLocation, string guestName, ShoppingCart shoppingCart) 
+        public int AccountMenu(int custID, int storeID, string guestName, ShoppingCart shoppingCart) 
         {
             string guestAddress = StoreLogin(custID).GetAddress();
             while (true)
@@ -112,8 +98,7 @@ namespace PZero.App
                             cust1 = AddCustomer(storeID);
                         }
                         else
-                        {
-                            
+                        {                           
                             Console.WriteLine("Welcome Back!");
                             Thread.Sleep(900);
                         }
@@ -160,12 +145,12 @@ namespace PZero.App
                 }
             }
         }
-        public int ShoppingMenu(int custID, int storeID, string userLocation, string guestName, ShoppingCart shoppingCart)
+        public int ShoppingMenu(int custID, int storeID, ShoppingCart shoppingCart)
         {
             while (true)
             {
                 Console.Clear();
-                userLocation=this.repo.GetStoreName(storeID);
+                string userLocation=repo.GetStoreName(storeID);
                 Console.WriteLine($"Shopping Menu\nCurrent Location: {userLocation}\n");
                 Console.WriteLine("[1] - Search Inventory");
                 Console.WriteLine("[2] - View Shopping Cart");
@@ -178,7 +163,7 @@ namespace PZero.App
                 {
                     case "1":
                         Console.Clear();
-                        this.SearchStoreInventory(storeID, userLocation, shoppingCart);
+                        SearchStoreInventory(storeID, userLocation, shoppingCart);
                         break;
                     case "2":
                         Console.Clear();
@@ -194,13 +179,13 @@ namespace PZero.App
                         break;
                     case "4":
                         Console.Clear();
-                        Console.WriteLine(this.CheckOut(shoppingCart, storeID, custID));
+                        Console.WriteLine(CheckOut(shoppingCart, storeID, custID));
                         Console.WriteLine("\nPress enter to return to the Shopping menu.");
                         Console.ReadLine();
                         break;
                     case "5":
                         Console.Clear();
-                        storeID = this.GetListStoreNames();                     
+                        storeID = GetListStoreNames();                     
                         break;
                     case "0":
                         Console.Clear();
@@ -387,9 +372,6 @@ namespace PZero.App
             Console.Clear();
             shoppingCart.EmptyCart();
             return "Transaction successfully completed!";
-
-
-            //add all items to purchase database with customerID and storeID
         }
         public Customer LogIn()
         {

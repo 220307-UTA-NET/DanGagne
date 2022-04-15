@@ -9,12 +9,12 @@ namespace P_One_UI.DTOs
     public class RoomDTO
     {
         public int roomID { get; set; }
-        public string roomName { get; set; }
-        public string roomDescription { get; set; }
+        public string? roomName { get; set; }
+        public string? roomDescription { get; set; }
         public int adjRoom1 { get; set; }
         public int adjRoom2 { get; set; }
         public int adjRoom3 { get; set; }
-        public List<ItemDTO> items { get; set; }
+        public List<ItemDTO>? items { get; set; }
 
         //Methods
         public List<int> AdjRooms()

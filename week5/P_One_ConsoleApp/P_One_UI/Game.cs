@@ -30,8 +30,8 @@ namespace P_One_UI
             {
                 Console.WriteLine("Enter the player number to delete.");
                 Int32.TryParse(Console.ReadLine(), out int delete);
-                gPlayerID = delete;
-                DeletePlayer(gPlayerID);
+                int deleteID = delete;
+                await DeletePlayer(deleteID);
                 Console.Clear();
                 await StartGame();
             }
@@ -53,20 +53,28 @@ namespace P_One_UI
             gRoom = 1;
             await FillRooms(gPlayerID);
             await ChangeRoom(gRoom);
-
+            return;
         }
         public async Task ChangeRoom(int gRoom)
         {
-            Console.Clear();
-            GameHeader();
-            RoomDTO currentRoom = await GetRoom(gRoom);
-            int[] roomIDs = new int[] { currentRoom.adjRoom1, currentRoom.adjRoom2, currentRoom.adjRoom3 };
-            List<RoomDTO> otherRooms = await GetRooms(roomIDs);
-            List<ItemDTO> roomTrash = await GetRoomInv(gRoom, gPlayerID);
-            FormatRoomDescription(currentRoom, otherRooms, roomTrash);
-            //choose to move || to pick up trash || look at inventory//
-            gRoom = await ChooseNextRoom(currentRoom);
-            await ChangeRoom(gRoom);
+            string runGame = ContinueGame();
+            while (runGame != "N" && runGame !="NO")
+            {             
+                Console.Clear();
+                GameHeader();
+                RoomDTO currentRoom = await GetRoom(gRoom);
+                int[] roomIDs = new int[] { currentRoom.adjRoom1, currentRoom.adjRoom2, currentRoom.adjRoom3 };
+                List<RoomDTO> otherRooms = await GetRooms(roomIDs);
+                List<ItemDTO> roomTrash = await GetRoomInv(gRoom, gPlayerID);
+                FormatRoomDescription(currentRoom, otherRooms, roomTrash);
+                //choose to move || to pick up trash || look at inventory//
+                gRoom = await ChooseNextRoom(currentRoom);
+                await ChangeRoom(gRoom);
+            }
+            //await RemovePlayerItemTable(gPlayerID);
+            Console.WriteLine("Game Ending");
+            Console.ReadLine();
+            return;
         }
         public async Task<int> ChooseNextRoom(RoomDTO currentRoom)
         {
@@ -85,6 +93,12 @@ namespace P_One_UI
                 }
             }
             return gRoom;
+        }
+        public string ContinueGame()
+        {
+            Console.WriteLine("Continue Cleaning?\n--[Y/N]--");
+            string answer = Console.ReadLine().ToUpper();
+            return answer; 
         }
         public void GameHeader()
         {
@@ -293,6 +307,20 @@ namespace P_One_UI
             }
             List<ItemDTO> roomInventory = JsonSerializer.Deserialize<List<ItemDTO>>(information);
             return roomInventory;
+        }
+        public async Task RemovePlayerItemTable(int gPlayerID)
+        {
+            var information = "";
+            HttpResponseMessage response = await client.DeleteAsync($"player/delete/table?playerID={gPlayerID}");
+            if (response.IsSuccessStatusCode)
+            {
+                information = response.Content.ReadAsStringAsync().Result;
+
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
         }
     }
 }

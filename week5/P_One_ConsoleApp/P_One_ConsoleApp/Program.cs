@@ -9,6 +9,7 @@ namespace P_One_ConsoleApp
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7083/");
+            //client.BaseAddress = new Uri("https://dgagneprojone.azurewebsites.net/");
             Game game = new Game(client);
             await game.StartGame();
         }

@@ -37,6 +37,8 @@ namespace P_One_API.Controllers
 
             string json = JsonSerializer.Serialize(playerinfo);
 
+            _logger.LogInformation("Get all players");
+
             return new ContentResult()
             {
                 StatusCode = 200,
@@ -49,12 +51,13 @@ namespace P_One_API.Controllers
         [HttpGet("/player/current")]
         public async Task<ContentResult> GetOnePlayerAsync(int playerID)
         {
-            var current = await _repo.GetPlayer(playerID);          
+            var current = await _repo.GetPlayer(playerID);
             string json = JsonSerializer.Serialize(current);
+            _logger.LogInformation("Get one player");
 
             return new ContentResult()
             {
-                StatusCode = 200, 
+                StatusCode = 200,
                 ContentType = "application/json",
                 Content = json
             };
@@ -87,10 +90,11 @@ namespace P_One_API.Controllers
         }
 
         [HttpPost("/player/create")]
-        public async Task<ContentResult> AddPlayerAsync(string playerName)
+        public async Task<ContentResult> AddPlayerAsync([FromBody] string playerName)
         {
             Player player = new Player(playerName);
             string json = await _repo.NewPlayer(player);
+            _logger.LogInformation("Player created");
 
             return new ContentResult()
             {
@@ -98,6 +102,18 @@ namespace P_One_API.Controllers
                 ContentType = "application/json",
                 Content = json
             };
+        }
+        [HttpPut("/player/current/moves")]
+        public async Task<ContentResult> UpdatePlayerMovesAsync([FromBody] int playerID)
+        {
+            
+            await _repo.AddPlayerMove(playerID);
+
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
+            
         }
 
         [HttpDelete("/player/delete")]
@@ -115,26 +131,84 @@ namespace P_One_API.Controllers
         }
 
         [HttpDelete("/room/inventory/delete")]
-        public async Task<ContentResult> DeleteRoomInventory()
+        public async Task<ContentResult> DeleteRoomInventoryAsync()
         {
             await _repo.EmptyAllRooms();
 
             return new ContentResult()
             {
-                StatusCode = 204             
+                StatusCode = 204
             };
         }
-        [HttpPut("/room/inventory/fill")]
-        public async Task<ContentResult> FillAllRoomsInventory()
+        [HttpPost("/room/inventory/fill")]
+        public async Task<ContentResult> FillAllRoomsInventoryAsync([FromBody]int playerID)
         {
-            await _repo.FillAllRooms();
+            await _repo.FillAllRooms(playerID);
+
+            _logger.LogInformation("Player table filled");
 
             return new ContentResult()
             {
-                StatusCode = 201
+                StatusCode = 200,
             };
         }
-       
-        
+        [HttpGet("/room/current/inventory")]
+        public async Task<ContentResult> GetOneRoomInventoryAsync([FromQuery] int[] r_pID)
+        {
+            List<Item> roomInventory = await _repo.GetRoomInventory(r_pID[0], r_pID[1]);
+            string json = JsonSerializer.Serialize(roomInventory);
+
+            return new ContentResult()
+            {
+                StatusCode = 200,
+                ContentType = "application/json",
+                Content = json
+            };
+        }
+
+        [HttpGet("/room/current")]
+        public async Task<ContentResult>GetRoomCurrentAsync(int roomID)
+        {
+            var currentRoom = await _repo.GetRoom(roomID);
+            string json = JsonSerializer.Serialize(currentRoom);
+
+            return new ContentResult()
+            {
+                StatusCode = 200,
+                ContentType = "application/json",
+                Content = json
+            };
+        }
+
+        [HttpGet("/room/adjacent")]
+        public async Task<ContentResult>GetAdjRoomsAsync([FromQuery]int[] roomIDs)
+        {
+            List<Room> adjRooms = new List<Room>();
+            foreach (int roomID in roomIDs)
+            {
+                Room adjRoom = await _repo.GetRoom(roomID);
+                adjRooms.Add(adjRoom);
+            }
+            string json = JsonSerializer.Serialize(adjRooms);
+
+            return new ContentResult()
+            {
+                StatusCode = 200,
+                ContentType = "application/json",
+                Content = json
+            };
+        }
+
+        [HttpPost("/player/create/table")]
+        public async Task<ContentResult>MakePlayerItemTable([FromBody] int playerID)
+        {
+            await _repo.CreatePlayerItemTable(playerID);
+            return new ContentResult()
+            {
+                StatusCode = 200,
+            };
+        }
+
+
     }
 }

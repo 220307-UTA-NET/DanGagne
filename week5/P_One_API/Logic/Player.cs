@@ -4,11 +4,11 @@ namespace Logic
 {
     public class Player
     {    
-        internal string? playerName { get; set; }
+        public string? playerName { get; set; }
         public int playerID { get; set; }
-        public int hp { get; set; }
-        public int str { get; set; }
-        public int dex { get; set; }
+        public int trash { get; set; }
+        public int load { get; set; }
+        public int moves { get; set; }
 
         public Player() { }
 
@@ -16,13 +16,13 @@ namespace Logic
         {
             this.playerName = playerName;
         }
-        public Player(string playerName, int playerID, int hp, int str, int dex)
+        public Player(string playerName, int playerID, int trash, int load, int moves)
         {
             this.playerName = playerName;
             this.playerID = playerID;
-            this.hp = hp;
-            this.str = str;
-            this.dex = dex;
+            this.trash = trash;
+            this.load = load;
+            this.moves = moves;
         }
 
         public string? GetName()
@@ -39,9 +39,9 @@ namespace Logic
         public List<int> GetStats()
         {
             List<int> stats = new List<int>();
-            stats.Add(hp);
-            stats.Add(str);
-            stats.Add(dex);
+            stats.Add(trash);
+            stats.Add(load);
+            stats.Add(moves);
             return stats;
         }
 

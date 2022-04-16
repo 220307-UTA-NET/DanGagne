@@ -9,6 +9,7 @@ namespace Logic
         public int trash { get; set; }
         public int load { get; set; }
         public int moves { get; set; }
+        List<Item> playerTrash { get; set; }
 
         public Player() { }
 
@@ -36,14 +37,6 @@ namespace Logic
             return sb.ToString();
         }
 
-        public List<int> GetStats()
-        {
-            List<int> stats = new List<int>();
-            stats.Add(trash);
-            stats.Add(load);
-            stats.Add(moves);
-            return stats;
-        }
 
     }
 }

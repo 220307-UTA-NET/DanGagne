@@ -9,8 +9,8 @@ namespace Logic
     public class Room
     {
         public int roomID { get; set; }
-        public string roomName { get; set; }
-        public string roomDescription { get; set; }
+        public string? roomName { get; set; }
+        public string? roomDescription { get; set; }
         public int adjRoom1 { get; set; }
         public int adjRoom2 { get; set; }
         public int adjRoom3 { get; set; }

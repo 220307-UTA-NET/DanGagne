@@ -12,7 +12,7 @@ namespace P_One_ConsoleApp
             //client.BaseAddress = new Uri("https://dgagneprojone.azurewebsites.net/");
             Game game = new Game(client);
             await game.StartGame();
-            Console.WriteLine("Game Over!");
+            
         }
     }
 }

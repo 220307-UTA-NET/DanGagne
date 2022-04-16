@@ -9,7 +9,7 @@ namespace Logic
     public class Item
     {
         public int itemID { get; set; }
-        public string itemName { get; set; }
+        public string? itemName { get; set; }
         public int itemWeight { get; set; }
 
 

@@ -10,21 +10,19 @@ namespace Database
     {
         private readonly string _connString;
         private readonly ILogger<SqlRepo> _logger;
-
         public SqlRepo(string connString, ILogger<SqlRepo> logger)
         {
             this._connString = connString ?? throw new ArgumentNullException(nameof(connString));
             this._logger = logger;
         }
-
-        public async Task<List<Player>> AllPlayers()
+        public async Task<List<Player>> LastTwoPlayers()
         {
             List<Player> playerList = new List<Player>();
 
             using SqlConnection connect = new SqlConnection(this._connString);
             await connect.OpenAsync();
 
-            string cmdText = $"SELECT * FROM ProjOne.Player;";
+            string cmdText = $"SELECT TOP 2 * FROM ProjOne.Player ORDER BY PlayerID DESC";
             using SqlCommand cmd = new(cmdText, connect);
 
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -40,10 +38,9 @@ namespace Database
             }
             await connect.CloseAsync();
 
-            _logger.LogInformation("Executed: SqlRepo.AllPlayers");
+            _logger.LogInformation("Executed: SqlRepo.LastTwoPlayers");
             return playerList;
         }
-
         public async Task<string> RemovePlayer(int playerID)
         {
             string deletedPlayer = "";
@@ -64,10 +61,11 @@ namespace Database
             using SqlCommand cmd2 = new(cmdText, connect);
             cmd2.ExecuteNonQuery();
             await connect.CloseAsync();
+
+            _logger.LogInformation($"Executed: SqlRepo.RemovePlayer ID={playerID}");
             return $"{deletedPlayer} deleted.";
 
         }
-
         public async Task<string> NewPlayer(Player player)
         {
             using SqlConnection connect = new SqlConnection(this._connString);
@@ -79,6 +77,8 @@ namespace Database
 
             cmd.ExecuteNonQuery();
             await connect.CloseAsync();
+
+            _logger.LogInformation($"Executed: SqlRepo.NewPlayer Name: {player.GetName()}");
             return $"New Player {player.GetName()} added!";
 
         }
@@ -110,18 +110,24 @@ namespace Database
                 currentPlayer = new(name, id, trash, load, moves);
             }
             await connect.CloseAsync();
+
+            _logger.LogInformation($"Executed: SqlRepo.GetPlayer ID: {playerID}");
             return currentPlayer;
         }
-        public async Task AddPlayerMove(int playerID)
+        public async Task UpdatePlayerStats(Player current)
         {
             using SqlConnection connect = new SqlConnection(this._connString);
             await connect.OpenAsync();
 
-            string cmdText = $"UPDATE ProjOne.Player SET Moves=Moves+1 WHERE PlayerID={playerID};";
+            string cmdText = $"UPDATE ProjOne.Player SET Moves={current.moves}, Trash={current.trash}, Load={current.load} WHERE PlayerID={current.playerID};";
             using SqlCommand cmd = new(cmdText, connect);
             cmd.ExecuteNonQuery();
+
+            _logger.LogInformation($"Executed: SqlRepo.AddPlayerMove {current.moves} moves, {current.trash} trash, {current.load} load");
             await connect.CloseAsync();
         }
+
+        //Unneccesarry after changed to making custom table per player
         public async Task EmptyAllRooms()
         {           
             using SqlConnection connect = new SqlConnection(this._connString);
@@ -130,6 +136,8 @@ namespace Database
             string cmdText = $"DELETE FROM ProjOne.RoomInventory";
             using SqlCommand cmd2 = new(cmdText, connect);
             cmd2.ExecuteNonQuery();
+
+            _logger.LogInformation("Executed: SqlRepo.EmptyAllRooms");
             await connect.CloseAsync();           
         }
         public async Task<string> FillAllRooms(int playerID)
@@ -157,9 +165,10 @@ namespace Database
                 cmd2.ExecuteNonQuery();
             }
             await connect2.CloseAsync();
+
+            _logger.LogInformation($"Executed: SqlRepo.FillAllRooms Rooms: {numberOfRooms}");
             return "Rooms Filled!";
         }
-
         public async Task<Room> GetRoom(int roomID)
         {
             Room currentRoom = new Room();
@@ -180,29 +189,9 @@ namespace Database
                 currentRoom = new(roomID, roomName, roomDetails, adjRoom1, adjRoom2, adjRoom3);
             }
             await connect.CloseAsync();
+            _logger.LogInformation($"Executed: SqlRepo.GetRoom RoomID: {roomID}");
             return currentRoom;
-
-        }
-        public async Task<List<Room>> GetAdjRoomNames(List<int> roomIDs)
-        {
-            List<Room> adjRooms = new List<Room>();
-            using SqlConnection connect = new SqlConnection(this._connString);
-            await connect.OpenAsync();
-            foreach (int i in roomIDs)
-            { 
-                string cmdText = $"SELECT * FROM ProjOne.Room WHERE RoomID={i};";
-                using SqlCommand cmd = new(cmdText, connect);
-
-                using SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    string roomName = reader.GetString(1);
-                    int roomID = reader.GetInt32(0);                  
-                    adjRooms.Add(new(roomName, roomID));
-                }
-            }
-            await connect.CloseAsync();
-            return adjRooms;
+            
         }
         public async Task<List<Item>> GetRoomInventory(int roomID, int playerID)
         {
@@ -225,9 +214,9 @@ namespace Database
                 }          
             }
             await connect.CloseAsync();
+            _logger.LogInformation($"Executed: SqlRepo:GetRoomInventory RoomID: {roomID}");
             return roomInventory;
         }
-
         public async Task CreatePlayerItemTable(int playerID)
         {
             using SqlConnection connect = new SqlConnection(this._connString);
@@ -237,6 +226,55 @@ namespace Database
             using SqlCommand cmd = new(cmdText, connect);
             cmd.ExecuteNonQuery();
             await connect.CloseAsync();
+
+            _logger.LogInformation($"Executed SqlRepo.CreatePlayerItemTable PlayerID: {playerID}");
+        }
+        public async Task DropPlayerItemTable(int playerID)
+        {
+            using SqlConnection connect = new SqlConnection(this._connString);
+            await connect.OpenAsync();
+            string cmdText = $"DROP TABLE ProjOne.Player{playerID}RoomItems;";
+            using SqlCommand cmd = new(cmdText, connect);
+            cmd.ExecuteNonQuery();
+            await connect.CloseAsync();
+
+            _logger.LogInformation($"Executed SqlRepo.DropPlayerItemTable PlayerID: {playerID}");
+        }
+        public async Task UpdateItemQuantity(R_P_I_DTO combo)
+        {
+            List <int> items = new List<int> ();
+            string delete="";
+            using SqlConnection connect = new SqlConnection(this._connString);
+            await connect.OpenAsync();
+
+            string cmdText = $"SELECT * FROM ProjOne.Player{combo.player.playerID}RoomItems WHERE RoomID = {combo.room.roomID};";
+            using SqlCommand cmd = new(cmdText, connect);
+            using (SqlDataReader reader = cmd.ExecuteReader())
+                while(reader.Read())
+                {
+                    int itemID1 = reader.GetInt32(1);
+                    int itemID2 = reader.GetInt32(2);
+                    int itemID3 = reader.GetInt32(3);
+                    items = new() { itemID1, itemID2, itemID3 };  
+                }
+
+            for(int i = 0; i < items.Count; i++)
+            {
+                if (items[i] == combo.item.itemID)
+                { 
+                    delete = $"ItemID{i + 1}";
+                    break;
+                }
+                
+            }
+ 
+            cmdText = $"UPDATE ProjOne.Player{combo.player.playerID}RoomItems SET {delete} = 0 WHERE RoomID = {combo.room.roomID} AND {delete}={combo.item.itemID};";
+            using SqlCommand cmd2 = new(cmdText, connect);
+            cmd2.ExecuteNonQuery();
+
+            await connect.CloseAsync();
+
+            _logger.LogInformation($"Executed: SqlRepo.DeleteOneItem Room: {combo.room.roomID}");
         }
 
     }

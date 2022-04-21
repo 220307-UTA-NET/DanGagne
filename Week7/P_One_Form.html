@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Dan's Page Title</title>
+</head>
+<body>
+    <h2>Housing Cleaning Game</h2>
+    <h3>Enter your first name so we can call you something</h3>
+    <form action="#" method ="post">
+        <label>
+            Name:
+        <input type="text" name="firstname" id="firstname" placeholder="Your First Name">
+        <input type="submit">
+        </label>
+        <br><br>
+    </form>
+
+    <h3>Start cleaning!!!</h3>
+    <p>This is the information about the room here (Would be a get method?)</p>
+    <p>This is where the info about the trash goes(Would be a get method?)</p>
+    <form action ="#" method ="get">
+        <label>
+            Choose your item to clean(based on room get?):
+            <br>
+            <select name="trash">
+                    <option value="1">Towel</option>
+                    <option value="2">T-Shirt</option>
+                    <option value="3">Wooden scraps</option>
+            <input type = "submit" value="Clean">
+        </label>
+    </form>
+
+    <br>
+
+    <form action="#" method="get">
+        <label>
+            Choose your next room(based on room get?):
+            <br>
+            <select name="rooms">
+                <option value="1">Hallway</option>
+                <option value="2">Entryway</option>
+                <option value="3">Living Room</option>
+            <input type = "submit" value="Go to Room">
+        </label> 
+    </form>
+    <br>
+    <form action="#" method="get">
+        <input type= "submit" value="View inventory!">
+    </form>
+    <br>
+    <form action="#" method="get">
+        <input type= "submit" value="Quit Game!">
+    </form>
+
+</body>
+</html>

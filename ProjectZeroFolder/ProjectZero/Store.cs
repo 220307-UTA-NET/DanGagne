@@ -208,6 +208,11 @@ namespace ProjectZero
             
         }
 
+        public void PlaceOrder()
+        {
+            Order order1 = new Order(); 
+        }
+
         public void SerializeAsXml(string location)
         {
             //Save Stock to XML

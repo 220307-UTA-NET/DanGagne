@@ -21,16 +21,16 @@ namespace ProjectZero
         
         //Constructor
 
-        public Customer(){}
-        public Customer(string fname, string lname, string customerLocation)
-        {
-            this.fname=fname;
-            this.lname=lname;
-            this.customerLocation=customerLocation;
-            this.customerId=customerId;
-            this.address=address;
+      //  public Customer(){}
+        //public Customer(string fname, string lname, string customerLocation)
+        //{
+        //    this.fname=fname;
+        //    this.lname=lname;
+        //    this.customerLocation=customerLocation;
+        //    this.customerId=customerId;
+        //    this.address=address;
 
-        }
+        //}
 
         //Methods
 

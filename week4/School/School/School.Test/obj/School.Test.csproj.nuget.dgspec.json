@@ -1,0 +1,289 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Test\\School.Test.csproj": {}
+  },
+  "projects": {
+    "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj",
+        "projectName": "School.Database",
+        "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj",
+        "packagesPath": "C:\\Users\\jdang\\.nuget\\packages\\",
+        "outputPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jdang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj": {
+                "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj",
+        "projectName": "School.Logic",
+        "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj",
+        "packagesPath": "C:\\Users\\jdang\\.nuget\\packages\\",
+        "outputPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jdang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Test\\School.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Test\\School.Test.csproj",
+        "projectName": "School.Test",
+        "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Test\\School.Test.csproj",
+        "packagesPath": "C:\\Users\\jdang\\.nuget\\packages\\",
+        "outputPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jdang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj": {
+                "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj"
+              },
+              "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj": {
+                "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj"
+              },
+              "C:\\Revature\\DanGagne\\week4\\School\\School\\School\\School.App.csproj": {
+                "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School\\School.App.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.11.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.17.2, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Revature\\DanGagne\\week4\\School\\School\\School\\School.App.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Revature\\DanGagne\\week4\\School\\School\\School\\School.App.csproj",
+        "projectName": "School.App",
+        "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School\\School.App.csproj",
+        "packagesPath": "C:\\Users\\jdang\\.nuget\\packages\\",
+        "outputPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jdang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj": {
+                "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Database\\School.Database.csproj"
+              },
+              "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj": {
+                "projectPath": "C:\\Revature\\DanGagne\\week4\\School\\School\\School.Logic\\School.Logic.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

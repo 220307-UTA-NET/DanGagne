@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Logic
+namespace P_One.Logic
 {
     public class Player
     {    
@@ -9,7 +9,7 @@ namespace Logic
         public int trash { get; set; }
         public int load { get; set; }
         public int moves { get; set; }
-        List<Item> playerTrash { get; set; }
+        public int itemID { get; set; }
 
         public Player() { }
 
@@ -37,6 +37,12 @@ namespace Logic
             return sb.ToString();
         }
 
+        public string PlayerHeader()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"----------GET TO CLEANING----------\n--  {playerName} TRASH CLEANED-{trash}, LOAD-{load} LBS, MOVES-{moves}  --\n");
+            return sb.ToString();
+        }
 
     }
 }

@@ -80,7 +80,7 @@ namespace PZero.App
                 Console.WriteLine("[4] - View Customer Order History");
                 Console.WriteLine("[5] - Log Out");
                 Console.WriteLine("[0] - Return to the Main Menu");
-
+                
                 switch (Console.ReadLine())
                 {
                     case "1":

@@ -1,0 +1,6 @@
+C:\Revature\DanGagne\week4\School\School\School.Test\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Revature\DanGagne\week4\School\School\School.Test\obj\Debug\net6.0\School.Test.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week4\School\School\School.Test\obj\Debug\net6.0\School.Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week4\School\School\School.Test\obj\Debug\net6.0\School.Test.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week4\School\School\School.Test\obj\Debug\net6.0\School.Test.AssemblyInfo.cs
+C:\Revature\DanGagne\week4\School\School\School.Test\obj\Debug\net6.0\School.Test.csproj.CoreCompileInputs.cache

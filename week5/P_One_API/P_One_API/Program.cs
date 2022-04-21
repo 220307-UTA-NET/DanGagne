@@ -1,11 +1,11 @@
-using Database;
-using Logic;
+using P_One.Database;
+using P_One.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Connection string
-//Argument, Hardcoded, file, user Secrets, environemnt variable
+//Connection for localhost testing
 string connectionString = builder.Configuration["connectionString"];
+//Connection for Deployment to Azure
 //string connectionString = builder.Configuration.GetConnectionString("ProjOneConnection");
 
 builder.Services.AddControllers();
@@ -24,11 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseRouting();
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapControllers();
-//});
 
 app.UseHttpsRedirection();
 

@@ -1,0 +1,31 @@
+# the dockerfile is the script or the commans that are followed to build a doccker image
+# The FROM statement/command pulls an image to start working off of
+FROM mcr.microsoft.com/dotnet.sdk:6.0 AS build
+#FROM <repo>/<user>/<image>:<tag> (tag specifies the version of a particular image, defaults to latest)
+
+#The WORKDIR statement/command changes the working directory of the container
+WORKDIR /App
+# IF the specifed directory does not exist in the container, it will be created
+
+# The COPY statement/command copies files from the host to the container
+COPY ./ ./
+#COPY <source/the file location of the Dockerfile><destination/inside the working directory of the container/image>
+
+# the Run statement/command runs somethign inside the container
+RUN dotnet build
+#RUN <command>
+
+#Two phase builds start by builidng he solution then pare down the environment to the minimum needed
+#to run the executable
+#THE SDK is a large package to include, and is only really needed for the build
+#running the project can be done with a more limited environment
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS run
+
+WORKDIR /App
+
+COPY --from=build /App/bin/Debug/net6.0/ ./
+
+
+# The ENTRYPOINT statement.comman specifies the command that isrun when thee container is started
+ENTRYPOINT ["dotnet","./DockerDemo.dll"]

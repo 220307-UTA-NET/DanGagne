@@ -1,0 +1,12 @@
+C:\Revature\DanGagne\week4\School\School\School.Logic\bin\Debug\net6.0\School.Logic.deps.json
+C:\Revature\DanGagne\week4\School\School\School.Logic\bin\Debug\net6.0\School.Logic.dll
+C:\Revature\DanGagne\week4\School\School\School.Logic\bin\Debug\net6.0\School.Logic.pdb
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.csproj.AssemblyReference.cache
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.AssemblyInfoInputs.cache
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.AssemblyInfo.cs
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.csproj.CoreCompileInputs.cache
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.dll
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\refint\School.Logic.dll
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\School.Logic.pdb
+C:\Revature\DanGagne\week4\School\School\School.Logic\obj\Debug\net6.0\ref\School.Logic.dll

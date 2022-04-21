@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Revature\\DanGagne\\week5\\Battleship\\Battleship.Logic\\Battleship.Logic.csproj",
+      "projectUniqueName": "C:\\Revature\\DanGagne\\SideProjects\\Battleship\\Battleship.Logic\\Battleship.Logic.csproj",
       "projectName": "Battleship.Logic",
-      "projectPath": "C:\\Revature\\DanGagne\\week5\\Battleship\\Battleship.Logic\\Battleship.Logic.csproj",
+      "projectPath": "C:\\Revature\\DanGagne\\SideProjects\\Battleship\\Battleship.Logic\\Battleship.Logic.csproj",
       "packagesPath": "C:\\Users\\jdang\\.nuget\\packages\\",
-      "outputPath": "C:\\Revature\\DanGagne\\week5\\Battleship\\Battleship.Logic\\obj\\",
+      "outputPath": "C:\\Revature\\DanGagne\\SideProjects\\Battleship\\Battleship.Logic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jdang\\AppData\\Roaming\\NuGet\\NuGet.Config",

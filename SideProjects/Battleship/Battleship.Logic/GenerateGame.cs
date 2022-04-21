@@ -9,22 +9,24 @@
         //methods
         public void StartGame()
         {
-            string[,] hiddenboard = FillGameBoard();
-            string[,] gameboard = new string[10, 10];
-            gameboard = GetBlankBoard(gameboard, "----");
-            int hit = 0;
-            while (hit != 17)
-            {
-                Console.Clear();
-                ShowHiddenBoard(gameboard);
-                //ShowHiddenBoard(board);
-                Console.WriteLine("\n\nInput your guess!");
-                string guess = Console.ReadLine().ToUpper();
-                int[] guessIndex = ConvertInput(guess);
-                gameboard=UpdateGameBoard(gameboard, hiddenboard, guessIndex);
-                hit = CheckFor17HITS(gameboard);
+            while (true)
+            { 
+                string[,] hiddenboard = FillGameBoard();
+                string[,] gameboard = new string[10, 10];
+                gameboard = GetBlankBoard(gameboard, "----");
+                int hit = 0;
+                while (hit != 17)
+                {
+                    Console.Clear();
+                    ShowHiddenBoard(gameboard);
+                    Console.WriteLine("\n\nInput your guess!");
+                    int[] guessIndex = ConvertInput();
+                    gameboard = UpdateGameBoard(gameboard, hiddenboard, guessIndex);
+                    hit = CheckFor17HITS(gameboard);
+                }
+                Console.WriteLine("You Won!\nPlay Again? [Y/N]");
+                PlayAgain();
             }
-            Console.WriteLine("You Won!\nGame Exiting");
           
         }  
         public string [,] FillGameBoard()
@@ -64,42 +66,49 @@
         }
         public string[,] AddShip(string[,] board, int length)
         {
-            while (true)
+            Random random = new Random();
+            bool horizontalOrVertical = random.Next(2) == 0;
+            int[] start = GetStart();
+            switch (horizontalOrVertical)
             {
-                int[] start = GetStart();
-                if (start[0] + (length - 1) < 10)
-                {
-                    for (int i = 0; i < length; i++)
+                case true:
                     {
-                        board.SetValue("HIT!", start[0]+i, start[1]);
+                        int leftOrRight = -1;
+                        while (true)
+                        {
+                            if ((start[0] + leftOrRight*(length-1) < 10) && (start[0] + leftOrRight * (length - 1) > -1))
+                            {
+                                //Console.WriteLine($"{start[0]} - {start[0] + leftOrRight * (length - 1)}, {start[1]}");
+                                for (int i = 0; i < length; i++)
+                                {
+                                    board.SetValue("HIT!", start[0] + i*leftOrRight, start[1]);
+                                }
+                                break;
+                            }
+                            else { leftOrRight = 1; }
+                        }
+                        break;
                     }
-                    break;
-                }
-                else if (start[1] + (length - 1) < 10)
-                {
-                    for (int i = 0; i < length; i++)
+
+                case false:
                     {
-                        board.SetValue("HIT!", start[0], start[1]+i);
+                        int upOrDown = -1;
+                        while(true)
+                        {
+                            if ((start[1] + upOrDown * (length - 1) < 10) && (start[1]+upOrDown*(length-1) > -1))                              
+                            {
+                                //Console.WriteLine($"{start[0]},  {start[1]} - {start[1] + upOrDown * (length - 1)}");
+                                for (int i = 0; i < length; i++)
+                                {
+                                    board.SetValue("HIT!", start[0], start[1] + i*upOrDown);
+                                }
+                                break;
+                            }
+                            else { upOrDown = 1; }
+                        }
+                        break;
                     }
-                    break;
-                }
-                else if (start[0] - (length - 1) < 10)
-                {
-                    for (int i = 0; i < length; i++)
-                    {
-                        board.SetValue("HIT!", start[0]-i, start[1]);
-                    }
-                    break;
-                }            
-                else if (start[1] - (length - 1) < 10)
-                {
-                    for (int i = 0; i < length; i++)
-                    {
-                        board.SetValue("HIT!", start[0], start[1]-i);
-                    }
-                    break;
-                }                               
-            }   
+            }  
             return board;
         }
         public int CheckFor17HITS(string[,] board)
@@ -131,15 +140,37 @@
                     b++;
                     c = 0;
                 }
-                Console.Write($" {gameboard[i / row, i % col]} ");
+                string print = gameboard[i / row, i % col];
+                if (print == "HIT!")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($" {print} ");
+                    Console.ForegroundColor= ConsoleColor.White;
+                }
+                else if(print == "MISS")
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write($" {print} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                { Console.Write($" {print} "); }
                 c++;
 
             }
         }
-        public int[] ConvertInput(string guess)
+        public int[] ConvertInput()
         {
-            string guess1 = "";
-            char guess2 = '\0';
+            int[] guessIndex = new int[2];
+            while (true)
+            {
+                string guess = Console.ReadLine().ToUpper();
+                if(guess.Length != 2 && guess.Length != 3)
+                {
+                    guess = "999";
+                }
+                string guess1 = "";
+                char guess2 = '\0';
 
                 foreach (char c in guess)
                 {
@@ -152,17 +183,36 @@
                         guess2 = c;
                     }
                 }
-            int number = Int32.Parse(guess1)-1;
-            int letter = (int)guess2-65;
-            int[] guessIndex = new int[] {number, letter};
+                int number = Int32.Parse(guess1) - 1;
+                int letter = (int)guess2 - 65;
+                guessIndex = new int[] { number, letter };
+                if (letter < 10 && letter > -1 && number < 10 && number > -1)
+                {                    
+                    break; 
+                }
+                Console.WriteLine("That's not a valid input!\nTry again.");
+            }
             return guessIndex;
 
         }
         public string[,] UpdateGameBoard(string[,] gameboard, string[,] board, int[]guessIndex)
         {
+
             string update = board[guessIndex[0], guessIndex[1]];
             gameboard[guessIndex[0], guessIndex[1]] = update;
             return gameboard;
+        }
+        public bool PlayAgain()
+        {
+            string playAgain = Console.ReadLine().ToUpper();
+            if (playAgain=="Y" || playAgain=="YES")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     
     }

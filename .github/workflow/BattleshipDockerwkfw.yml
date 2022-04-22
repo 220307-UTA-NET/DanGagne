@@ -3,8 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ main ]
-    paths: 
-      - 'SideProjects/Battleship/Battleship/**/**'
+    #paths: 
+     # - 'SideProjects/Battleship/Battleship/**/**'
   pull_request:
     branches: [ main ]
   workflow_dispatch:

@@ -27,7 +27,7 @@ jobs:
       run: docker build ./SideProjects/Battleship --tag battleship:$(date +%Y%m%d%H)
       
     - name: Tag the image
-      run: docker tag battleship:$(date +%Y%m%d%H) ${{secrets.DANG_DOCKER_USER}}/games
+      run: docker tag battleship:$(date +%Y%m%d%H) ${{secrets.DANG_DOCKER_USER}}/games:battleship:$(date +%Y%m%d%H)
       
     - name: Docker Push
-      run: docker push ${{secrets.DANG_DOCKER_USER}}/games
+      run: docker push ${{secrets.DANG_DOCKER_USER}}/games:battleship:$(date +%Y%m%d%H)

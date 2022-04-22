@@ -7,6 +7,7 @@ on:
       - 'SideProjects/Battleship/**/**'
   pull_request:
     branches: [ Main ]
+  workflow_dispatch:
 
 jobs:
 

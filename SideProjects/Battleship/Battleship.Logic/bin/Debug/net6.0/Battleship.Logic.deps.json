@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Battleship.Logic/1.0.0": {
+        "dependencies": {
+          "Battleship.Classes": "1.0.0"
+        },
         "runtime": {
           "Battleship.Logic.dll": {}
+        }
+      },
+      "Battleship.Classes/1.0.0": {
+        "runtime": {
+          "Battleship.Classes.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Battleship.Logic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Battleship.Classes/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ DanG ]
+    paths: 
+      - 'SideProjects/Battleship/**/**'
+  pull_request:
+    branches: [ DanG ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DANG_DOCKER_USER }}
+        DOCKER_PASSWORD: ${{secrets.DANG_DOCKER_PASS}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build ./Battleship --tag dangapp:$(date +%Y%m%d%H)
+      
+    - name: Tag the image
+      run: docker tag dangapp:$(date +%Y%m%d%H) ${{secrets.DANG_DOCKER_USER}}/games:battleship
+      
+    - name: Docker Push
+      run: docker push ${{secrets.DANG_DOCKER_USER}}/games:battleship

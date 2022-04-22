@@ -2,9 +2,22 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Battleship.Classes/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Battleship.Classes.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Battleship.Classes.dll": {}
+        }
+      },
       "Battleship.Logic/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Battleship.Classes": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Battleship.Logic.dll": {}
         },
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "Battleship.Classes/1.0.0": {
+      "type": "project",
+      "path": "../Battleship.Classes/Battleship.Classes.csproj",
+      "msbuildProject": "../Battleship.Classes/Battleship.Classes.csproj"
+    },
     "Battleship.Logic/1.0.0": {
       "type": "project",
       "path": "../Battleship.Logic/Battleship.Logic.csproj",

@@ -14,7 +14,15 @@
           "Battleship.dll": {}
         }
       },
+      "Battleship.Classes/1.0.0": {
+        "runtime": {
+          "Battleship.Classes.dll": {}
+        }
+      },
       "Battleship.Logic/1.0.0": {
+        "dependencies": {
+          "Battleship.Classes": "1.0.0"
+        },
         "runtime": {
           "Battleship.Logic.dll": {}
         }
@@ -23,6 +31,11 @@
   },
   "libraries": {
     "Battleship/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Battleship.Classes/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

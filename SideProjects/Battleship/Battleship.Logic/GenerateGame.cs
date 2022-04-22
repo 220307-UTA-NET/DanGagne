@@ -1,31 +1,49 @@
-﻿namespace Battleship.Logic
+﻿using Battleship.Classes;
+
+namespace Battleship.Logic
 {
     public class GenerateGame
     {
         //fields
+        Ship ship5 = new Ship("Carrier", 5);
+        Ship ship4 = new Ship("Battleship", 4);
+        Ship ship3 = new Ship("Destroyer", 3);
+        Ship ship2 = new Ship("Submarine", 3);
+        Ship ship1 = new Ship("Patrol Boat", 2);
+        List<Ship> fleet = new List<Ship>();
 
-        //constructor
-        public GenerateGame() { }
         //methods
+        public GenerateGame() { }  
         public void StartGame()
         {
-            while (true)
+            bool game = true;
+            while (game)
             { 
+
                 string[,] hiddenboard = FillGameBoard();
                 string[,] gameboard = new string[10, 10];
+                FillFleet();
                 gameboard = GetBlankBoard(gameboard, "----");
                 int hit = 0;
+                
+
                 while (hit != 17)
-                {
+                {       
+                    
                     Console.Clear();
+                    foreach(Ship ship in fleet)
+                    { ship.PrintIndicies();}
                     ShowHiddenBoard(gameboard);
-                    Console.WriteLine("\n\nInput your guess!");
-                    int[] guessIndex = ConvertInput();
-                    gameboard = UpdateGameBoard(gameboard, hiddenboard, guessIndex);
                     hit = CheckFor17HITS(gameboard);
+                    if(hit == 17)
+                    { break;}
+                    int[] guessIndex = ConvertInput();
+                    foreach(Ship ship in fleet)
+                    { UpdateShips(guessIndex, ship); }
+                    gameboard = UpdateGameBoard(gameboard, hiddenboard, guessIndex);                   
                 }
-                Console.WriteLine("You Won!\nPlay Again? [Y/N]");
-                PlayAgain();
+                Console.WriteLine("\nYou Won!\nPlay Again? [Y/N]");
+                game=PlayAgain();
             }
           
         }  
@@ -36,11 +54,16 @@
             while (hitTest < 17)
             {
                 board = GetBlankBoard(board, "MISS");
-                board = AddShip(board, 5);
-                board = AddShip(board, 4);
-                board = AddShip(board, 3);
-                board = AddShip(board, 3);
-                board = AddShip(board, 2);
+                ship5.ClearIndicies();
+                board = AddShip(board, ship5);
+                ship4.ClearIndicies();
+                board = AddShip(board, ship4);
+                ship3.ClearIndicies();
+                board = AddShip(board, ship3);
+                ship2.ClearIndicies();
+                board = AddShip(board, ship2);
+                ship1.ClearIndicies();
+                board = AddShip(board, ship1);
                 hitTest = CheckFor17HITS(board);
             }
             return board;
@@ -64,7 +87,7 @@
             int[] start = new int[] {col,row};
             return start;
         }
-        public string[,] AddShip(string[,] board, int length)
+        public string[,] AddShip(string[,] board, Ship ship)
         {
             Random random = new Random();
             bool horizontalOrVertical = random.Next(2) == 0;
@@ -76,12 +99,13 @@
                         int leftOrRight = -1;
                         while (true)
                         {
-                            if ((start[0] + leftOrRight*(length-1) < 10) && (start[0] + leftOrRight * (length - 1) > -1))
+                            if ((start[0] + leftOrRight*(ship.GetLength-1) < 10) && (start[0] + leftOrRight * (ship.GetLength - 1) > -1))
                             {
                                 //Console.WriteLine($"{start[0]} - {start[0] + leftOrRight * (length - 1)}, {start[1]}");
-                                for (int i = 0; i < length; i++)
+                                for (int i = 0; i < ship.GetLength; i++)
                                 {
                                     board.SetValue("HIT!", start[0] + i*leftOrRight, start[1]);
+                                    ship.SetLocationIndicies(start[0] + i * leftOrRight, start[1]);
                                 }
                                 break;
                             }
@@ -95,12 +119,13 @@
                         int upOrDown = -1;
                         while(true)
                         {
-                            if ((start[1] + upOrDown * (length - 1) < 10) && (start[1]+upOrDown*(length-1) > -1))                              
+                            if ((start[1] + upOrDown * (ship.GetLength - 1) < 10) && (start[1]+upOrDown*(ship.GetLength-1) > -1))                              
                             {
                                 //Console.WriteLine($"{start[0]},  {start[1]} - {start[1] + upOrDown * (length - 1)}");
-                                for (int i = 0; i < length; i++)
+                                for (int i = 0; i < ship.GetLength; i++)
                                 {
                                     board.SetValue("HIT!", start[0], start[1] + i*upOrDown);
+                                    ship.SetLocationIndicies(start[0], start[1] + i * upOrDown);
                                 }
                                 break;
                             }
@@ -110,6 +135,14 @@
                     }
             }  
             return board;
+        }
+        public void FillFleet()
+        {
+            fleet.Add(ship5);
+            fleet.Add(ship4);
+            fleet.Add(ship3);
+            fleet.Add(ship2);
+            fleet.Add(ship1);
         }
         public int CheckFor17HITS(string[,] board)
         {
@@ -128,7 +161,7 @@
         }
         public void ShowHiddenBoard(string [,] gameboard)
         {
-            Console.Write("\t|  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |");
+            Console.Write("\t***** BATTLESHIP *****\n\n\t|  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |");
             int row = 10;
             int col = 10;
             for (int i = 0, b = 1, c = 0; i < 100; i++)
@@ -161,6 +194,7 @@
         }
         public int[] ConvertInput()
         {
+            Console.WriteLine("\n\nInput your guess!");
             int[] guessIndex = new int[2];
             while (true)
             {
@@ -214,6 +248,14 @@
                 return false;
             }
         }
+        public void UpdateShips(int[] guess, Ship ship)
+        {
+            int hitIndex =ship.GetOneIndex(guess);  
+            ship.ChangeLocationIndicies(hitIndex);
+            //IsShipSunk(ship);
+            
+        }
+
     
     }
 }

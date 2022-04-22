@@ -1,0 +1,35 @@
+header
+{
+    font-size:10Pt;
+    font-weight:bold;
+    margin-right:45%;
+    padding-top: 2.5%;
+    padding-bottom: 1.8%;
+    padding-left: 4%;
+    border-style:solid;
+    border-width: 3Pt;   
+}
+h1{
+    margin-top:1%;
+}
+h2{
+    font-weight:bold;
+}
+
+.abouttext{
+    margin-bottom:6%;
+}
+.list2{
+    color: blue;
+    text-decoration: underline;
+}
+table, th, td{
+    border-style:solid
+}
+fieldset{
+    margin-right:10%;
+    margin-bottom:1%;
+}
+form{
+    margin-bottom:5%;
+}

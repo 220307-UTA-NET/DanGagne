@@ -30,4 +30,4 @@ jobs:
       run: docker tag battleship:$(date +%Y%m%d%H) ${{secrets.DANG_DOCKER_USER}}/games
       
     - name: Docker Push
-      run: docker push ${{secrets.DANG_DOCKER_USER}}/games:battleship
+      run: docker push ${{secrets.DANG_DOCKER_USER}}/games

@@ -2,11 +2,11 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ DanG ]
+    branches: [ Main ]
     paths: 
       - 'SideProjects/Battleship/**/**'
   pull_request:
-    branches: [ DanG ]
+    branches: [ Main ]
 
 jobs:
 

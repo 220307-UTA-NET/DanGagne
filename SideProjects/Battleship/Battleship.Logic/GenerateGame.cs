@@ -12,8 +12,15 @@ namespace Battleship.Logic
         Ship ship1 = new Ship("Patrol Boat", 2);
         List<Ship> fleet = new List<Ship>();
 
+        //constructor
+        public GenerateGame() { }
+
         //methods
-        public GenerateGame() { }  
+        /// <summary>
+        /// Generates filled gameboard and blank one to show in console
+        /// Loops until all ships have been sunk(17 HIT!s)
+        /// Updates game to show choices as HIT! or MISS
+        /// </summary>
         public void StartGame()
         {
             bool game = true;
@@ -25,14 +32,9 @@ namespace Battleship.Logic
                 FillFleet();
                 gameboard = GetBlankBoard(gameboard, "----");
                 int hit = 0;
-                
-
                 while (hit != 17)
-                {       
-                    
-                    Console.Clear();
-                    foreach(Ship ship in fleet)
-                    { ship.PrintIndicies();}
+                {                       
+                    Console.Clear();                 
                     ShowHiddenBoard(gameboard);
                     hit = CheckFor17HITS(gameboard);
                     if(hit == 17)
@@ -47,6 +49,12 @@ namespace Battleship.Logic
             }
           
         }  
+        /// <summary>
+        /// Takes the gameboard filled with MISS
+        /// Adds in HIT! for length of each ship
+        /// Checks that no ships intersect (need 17 HIT!s)
+        /// </summary>
+        /// <returns>the filled gameboard with HIT! or MISS</returns>
         public string [,] FillGameBoard()
         {
             string[,] board = new string[10, 10];
@@ -54,20 +62,23 @@ namespace Battleship.Logic
             while (hitTest < 17)
             {
                 board = GetBlankBoard(board, "MISS");
-                ship5.ClearIndicies();
+                foreach (Ship ship in fleet)
+                { ship.ClearIndicies(); }
                 board = AddShip(board, ship5);
-                ship4.ClearIndicies();
                 board = AddShip(board, ship4);
-                ship3.ClearIndicies();
                 board = AddShip(board, ship3);
-                ship2.ClearIndicies();
                 board = AddShip(board, ship2);
-                ship1.ClearIndicies();
                 board = AddShip(board, ship1);
                 hitTest = CheckFor17HITS(board);
             }
             return board;
         }
+        /// <summary>
+        ///Fills the 2d arrays that represent the two boards
+        /// </summary>
+        /// <param name="board">2d array that represents the board</param>
+        /// <param name="value">the string being put in each index</param>
+        /// <returns></returns>
         public string[,] GetBlankBoard(string[,] board, string value)
         {                     
             int row = board.GetLength(0);
@@ -79,6 +90,10 @@ namespace Battleship.Logic
             }
             return board;
         }
+        /// <summary>
+        /// Gets a random index within the board to start building a ship from
+        /// </summary>
+        /// <returns>an index that exists on the board</returns>
         public int[] GetStart()
         {
             Random rand = new Random();
@@ -87,6 +102,14 @@ namespace Battleship.Logic
             int[] start = new int[] {col,row};
             return start;
         }
+        /// <summary>
+        /// Randomly chooses to place a ship vertical or horizontally
+        /// Ensures ships are placed entirely on the board
+        /// Adds the indexes to a list on the ship class to know which ships are hit
+        /// </summary>
+        /// <param name="board">board being updated with hidden HIT!s</param>
+        /// <param name="ship">the ship being added to the board</param>
+        /// <returns>the board filled with a new ship</returns>
         public string[,] AddShip(string[,] board, Ship ship)
         {
             Random random = new Random();
@@ -136,6 +159,9 @@ namespace Battleship.Logic
             }  
             return board;
         }
+        /// <summary>
+        /// Adds the ships to a List so they can easily be iterated through
+        /// </summary>
         public void FillFleet()
         {
             fleet.Add(ship5);
@@ -144,6 +170,12 @@ namespace Battleship.Logic
             fleet.Add(ship2);
             fleet.Add(ship1);
         }
+        /// <summary>
+        /// Checks that a board has 17 HIT!s (total length of all ships
+        /// This ensures no ships overlap and also decides the win condition
+        /// </summary>
+        /// <param name="board">the board being checked for 17 HIT!s</param>
+        /// <returns>the number of HIT!s</returns>
         public int CheckFor17HITS(string[,] board)
         {
             int row = 10;
@@ -159,9 +191,17 @@ namespace Battleship.Logic
             }
             return c;
         }
+        /// <summary>
+        /// Prints out the game board for the console
+        /// Adds the numbers and letters to reference in call
+        /// </summary>
+        /// <param name="gameboard">the board being printed to the console</param>
         public void ShowHiddenBoard(string [,] gameboard)
         {
-            Console.Write("\t***** BATTLESHIP *****\n\n\t|  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |");
+            Console.WriteLine("\t\t\t***** BATTLESHIP *****");
+            foreach (Ship ship in fleet)
+            { ship.PrintIndicies(); }
+            Console.Write("\n\t|  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |");
             int row = 10;
             int col = 10;
             for (int i = 0, b = 1, c = 0; i < 100; i++)
@@ -192,16 +232,28 @@ namespace Battleship.Logic
 
             }
         }
+        /// <summary>
+        /// checks the users input and converts from a letter and a number to the index on the game board
+        /// </summary>
+        /// <returns>a valid index of the gameboard</returns>
         public int[] ConvertInput()
         {
-            Console.WriteLine("\n\nInput your guess!");
+            Console.Write("\n\nInput your guess: ");
             int[] guessIndex = new int[2];
             while (true)
             {
                 string guess = Console.ReadLine().ToUpper();
-                if(guess.Length != 2 && guess.Length != 3)
+                try 
+                { 
+                    if (guess.Length != 2 && guess.Length != 3)
+                    {
+                        throw new FormatException();
+                    }
+                }
+                catch (FormatException)
                 {
-                    guess = "999";
+                    InputRejection();
+                    goto Error;
                 }
                 string guess1 = "";
                 char guess2 = '\0';
@@ -217,18 +269,36 @@ namespace Battleship.Logic
                         guess2 = c;
                     }
                 }
-                int number = Int32.Parse(guess1) - 1;
-                int letter = (int)guess2 - 65;
-                guessIndex = new int[] { number, letter };
-                if (letter < 10 && letter > -1 && number < 10 && number > -1)
-                {                    
-                    break; 
+                try
+                {
+                    int number = Int32.Parse(guess1) - 1;
+                    int letter = (int)guess2 - 65;
+                    guessIndex = new int[] { number, letter };
+                    if (letter < 10 && letter > -1 && number < 10 && number > -1 && letter != -65)
+                    {
+                        break;
+                    }
+                    else { throw new FormatException(); }
+                }              
+                catch (FormatException)
+                {
+                    InputRejection();
                 }
-                Console.WriteLine("That's not a valid input!\nTry again.");
+            Error:
+                Thread.Sleep(100);
             }
+           
             return guessIndex;
 
         }
+        /// <summary>
+        /// Updates the game board after every guess
+        /// Changes the selected index to show the HIT! or MISS from the hidden board
+        /// </summary>
+        /// <param name="gameboard">the board printed to the console</param>
+        /// <param name="board">the board with the hidden values</param>
+        /// <param name="guessIndex">index that the player guessed</param>
+        /// <returns>the updated gameboard</returns>
         public string[,] UpdateGameBoard(string[,] gameboard, string[,] board, int[]guessIndex)
         {
 
@@ -236,6 +306,10 @@ namespace Battleship.Logic
             gameboard[guessIndex[0], guessIndex[1]] = update;
             return gameboard;
         }
+        /// <summary>
+        /// after win conditions are met this checks for a reset or to exit the application
+        /// </summary>
+        /// <returns>true on a replay, false on a quit</returns>
         public bool PlayAgain()
         {
             string playAgain = Console.ReadLine().ToUpper();
@@ -248,14 +322,28 @@ namespace Battleship.Logic
                 return false;
             }
         }
+        /// <summary>
+        /// Removes indicies from the ships if they are hit
+        /// when the list is empty the ship will display as sunk
+        /// </summary>
+        /// <param name="guess">index guessed</param>
+        /// <param name="ship">ship that it being checked for a hit</param>
         public void UpdateShips(int[] guess, Ship ship)
         {
-            int hitIndex =ship.GetOneIndex(guess);  
-            ship.ChangeLocationIndicies(hitIndex);
-            //IsShipSunk(ship);
-            
+            int hitIndex = ship.GetOneIndex(guess);  
+            ship.ChangeLocationIndicies(hitIndex);          
         }
-
-    
+        /// <summary>
+        /// formatting for error handling on bad input from player
+        /// </summary>
+        public static void InputRejection()
+        {
+            Console.WriteLine("\nThat's not a valid input! \nTry again.");
+            Console.SetCursorPosition(0, 29);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, 29);
+            Console.Write("Input your guess: ", Console.WindowWidth);
+        }
+  
     }
 }

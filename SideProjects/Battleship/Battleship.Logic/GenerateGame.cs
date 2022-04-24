@@ -25,11 +25,11 @@ namespace Battleship.Logic
         {
             bool game = true;
             while (game)
-            { 
-
+            {
+                FillFleet();
                 string[,] hiddenboard = FillGameBoard();
                 string[,] gameboard = new string[10, 10];
-                FillFleet();
+                //FillFleet();
                 gameboard = GetBlankBoard(gameboard, "----");
                 int hit = 0;
                 while (hit != 17)
@@ -62,9 +62,9 @@ namespace Battleship.Logic
             while (hitTest < 17)
             {
                 board = GetBlankBoard(board, "MISS");
-                foreach (Ship ship in fleet)
-                { ship.ClearIndicies(); }
-                board = AddShip(board, ship5);
+				foreach (Ship ship in fleet)
+				{ ship.ClearIndicies(); }
+				board = AddShip(board, ship5);
                 board = AddShip(board, ship4);
                 board = AddShip(board, ship3);
                 board = AddShip(board, ship2);

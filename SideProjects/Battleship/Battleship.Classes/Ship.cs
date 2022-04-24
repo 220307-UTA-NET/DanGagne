@@ -75,13 +75,13 @@
             { sunk ="Sunk!"; }
             Console.WriteLine($"{this.GetName}: {sunk}\t");
 
-            //foreach (var ind in locationIndicies)
-            //{
-            //    char letter = (char)(ind[1] + 65);
-            //    Console.WriteLine($"{letter}, {ind[0] + 1}");
-            //}
+			//foreach (var ind in locationIndicies)
+			//{
+			//	char letter = (char)(ind[1] + 65);
+			//	Console.WriteLine($"{letter}, {ind[0] + 1}");
+			//}
 
-        }
+		}
         
 
 
